@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { CASTING } from '../data/config';
+import { PRIMARY_CTA as CTA } from '../data/navigation';
+---
+
+<Base>
+  <section class="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
+        Selezioni 2026
+      </p>
+      <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl lg:text-7xl">
+        Lavora come infermiere nella
+        <span class="text-brand-secondary">Svizzera tedesca</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
+        Attivo dal {CASTING.stats.activeSince}, Progetto Svizzera ha accompagnato
+        {CASTING.stats.placed} infermieri italiani in strutture sanitarie svizzere.
+        Il prossimo casting è il <strong>{CASTING.nextDateDisplay}</strong>, online.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a
+          href={CTA.href}
+          class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-brand-secondary/90"
+        >
+          {CTA.label}
+        </a>
+        <a
+          href="/il-tuo-percorso"
+          class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-base font-semibold text-brand-ink transition-colors hover:border-brand-primary hover:text-brand-primary"
+        >
+          Scopri il percorso
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-20 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
+      <strong>Placeholder Blocco 1.</strong> Migrazione completa SwissHome.tsx
+      (numeri, testimonianze, video, Typeform embed) in Blocco 3.
+    </div>
+  </section>
+</Base>

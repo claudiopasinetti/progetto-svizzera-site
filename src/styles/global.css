@@ -1,0 +1,62 @@
+/* Google Fonts — da self-hostare in Blocco 5 per performance. Deve precedere @import di tailwindcss per non violare CSS spec */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors — normalizzati dal site-repo Lovable (eliminata incongruenza #FF1A1A vs #B91C1C) */
+  --color-brand-primary: #1E3A5F;
+  --color-brand-secondary: #B91C1C;
+  --color-brand-navy: #0F1F35;
+  --color-brand-bg: #FFFFFF;
+  --color-brand-ink: #1A1A1A;
+  --color-brand-muted: #F5F7FA;
+  --color-brand-muted-foreground: #66707E;
+  --color-brand-border: #D9E0E7;
+  --color-brand-success: #22C55E;
+
+  /* Typography */
+  --font-display: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(30 58 95 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(30 58 95 / 0.1), 0 2px 4px -1px rgb(30 58 95 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(30 58 95 / 0.1), 0 4px 6px -2px rgb(30 58 95 / 0.05);
+  --shadow-xl: 0 20px 25px -5px rgb(30 58 95 / 0.15), 0 10px 10px -5px rgb(30 58 95 / 0.08);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-brand-ink);
+    background-color: var(--color-brand-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-secondary);
+    color: #fff;
+  }
+}

@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { CASTING } from '../data/config';
+---
+
+<Base
+  title="Registrati al casting"
+  description={`Iscrizione al casting Progetto Svizzera del ${CASTING.nextDateDisplay}. Sessione online di circa ${CASTING.duration} per infermieri italiani interessati al percorso verso la Svizzera tedesca.`}
+>
+  <section class="mx-auto max-w-5xl px-4 py-24 md:px-6">
+    <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
+      Selezioni 2026
+    </p>
+    <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl">
+      Registrati al prossimo casting
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
+      {CASTING.nextDateDisplay}, online. Deadline iscrizioni:
+      <strong>{CASTING.deadlineDisplay}</strong>.
+    </p>
+
+    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
+      <strong>Placeholder Blocco 1.</strong> Typeform embed + countdown timer + form qualificazione
+      nel Blocco 3. Per ora le iscrizioni restano sul vecchio sito Lovable.
+    </div>
+  </section>
+</Base>
