@@ -22,6 +22,8 @@ const stats = [
 
 // Testimonial scritte rimosse — sostituite da video reali in arrivo (consensi V8 in corso).
 // Le storie pubbliche già pubblicate vivono su /v2/testimonianze + Instagram (Nassma, Dennis, Christie).
+const BASE_URL = import.meta.env.BASE_URL;
+
 ---
 
 <BaseV2 title={title} description={description}>
@@ -35,8 +37,8 @@ const stats = [
       Svizzera tedesca grazie a un percorso strutturato e validato da +{CASTING.stats.placed} infermieri.
     </p>
     <div style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 16px;">
-      <a href="/v2/registrazione" class="ps-button ps-button-primary">Iscriviti al casting →</a>
-      <a href="/v2/il-tuo-percorso" class="ps-button ps-button-outline">Scopri il percorso</a>
+      <a href={`${BASE_URL}v2/registrazione`} class="ps-button ps-button-primary">Iscriviti al casting →</a>
+      <a href={`${BASE_URL}v2/il-tuo-percorso`} class="ps-button ps-button-outline">Scopri il percorso</a>
     </div>
   </HeroBand>
 
@@ -123,7 +125,7 @@ const stats = [
           le trovi sui nostri canali e nella pagina dedicata.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px;">
-          <a href="/v2/testimonianze" class="ps-button ps-button-primary ps-button-sm">Vai alle storie →</a>
+          <a href={`${BASE_URL}v2/testimonianze`} class="ps-button ps-button-primary ps-button-sm">Vai alle storie →</a>
           <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="ps-button ps-button-outline ps-button-sm">Instagram</a>
         </div>
       </div>

@@ -11,6 +11,8 @@ const steps = [
   { n: 2, t: 'Beatrice ti chiama entro 48h lavorative', b: 'Una breve telefonata per confermare disponibilità e chiarire dubbi prima del casting.' },
   { n: 3, t: 'Inviti al casting + slot orario', b: `Ricevi il link Zoom e l'orario del tuo colloquio individuale per il ${CASTING.nextDateDisplay}.` },
 ];
+const BASE_URL = import.meta.env.BASE_URL;
+
 ---
 
 <BaseV2 title={title} description={description}>
@@ -91,7 +93,7 @@ const steps = [
         Va benissimo. Il casting di {CASTING.nextDateDisplay} è uno dei tre del 2026.
         Se vuoi seguire il progetto e ricevere info sui prossimi senza pressione, lascia solo l'email.
       </p>
-      <a href="/v2/newsletter" class="ps-button ps-button-outline" style="margin-top: 40px;">
+      <a href={`${BASE_URL}v2/newsletter`} class="ps-button ps-button-outline" style="margin-top: 40px;">
         Iscriviti alla newsletter
       </a>
     </div>
