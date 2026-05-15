@@ -13,7 +13,7 @@ export default defineConfig({
   base: '/progetto-svizzera-site',
   output: 'static',
   redirects: {
-    '/': '/v2/',
+    '/': '/progetto-svizzera-site/v2/',
   },
   integrations: [
     react(),
