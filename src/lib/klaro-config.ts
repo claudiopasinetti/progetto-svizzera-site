@@ -23,7 +23,7 @@ export const klaroConfig = {
   storageName: 'ps-klaro-v1',
   cookieDomain: undefined as string | undefined,
   cookieExpiresAfterDays: 365,
-  privacyPolicy: { default: '/v2/privacy-policy' },
+  privacyPolicy: { default: '/progetto-svizzera-site/v2/privacy-policy' },
   default: false,
   mustConsent: false,
   acceptAll: true,
@@ -66,7 +66,7 @@ export const klaroConfig = {
         acceptOnce: 'Sì',
         acceptAlways: 'Sempre',
       },
-      privacyPolicyUrl: '/v2/privacy-policy',
+      privacyPolicyUrl: '/progetto-svizzera-site/v2/privacy-policy',
     },
   },
   purposes: [
