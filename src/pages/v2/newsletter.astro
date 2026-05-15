@@ -13,7 +13,7 @@ const benefits = [
   { t: 'Aggiornamenti reali sul mestiere', b: 'Stipendi, ratio paziente-infermiere, novità riconoscimento titolo SRK.' },
   { t: 'Disiscrizione in 1 click', b: 'In fondo a ogni email.' },
 ];
-const BASE_URL = import.meta.env.BASE_URL;
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 ---
 
@@ -53,7 +53,7 @@ const BASE_URL = import.meta.env.BASE_URL;
           </ul>
           <p class="ps-body" style="margin-top: 40px; padding: 16px 20px; background: var(--ps-canvas-card); font-size: 13px; border-left: 4px solid var(--ps-secondary);">
             Se sai già che vuoi candidarti al casting di {CASTING.nextDateDisplay},
-            <a href={`${BASE_URL}v2/registrazione`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">vai direttamente all'iscrizione</a>.
+            <a href={`${BASE_URL}/v2/registrazione`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">vai direttamente all'iscrizione</a>.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ const BASE_URL = import.meta.env.BASE_URL;
             </div>
             <label class="ps-checkbox">
               <input type="checkbox" name="consent" required />
-              <span>Acconsento a ricevere comunicazioni email da Progetto Svizzera. Posso disiscrivermi in qualsiasi momento. <a href={`${BASE_URL}v2/privacy-policy`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">Privacy</a>.</span>
+              <span>Acconsento a ricevere comunicazioni email da Progetto Svizzera. Posso disiscrivermi in qualsiasi momento. <a href={`${BASE_URL}/v2/privacy-policy`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">Privacy</a>.</span>
             </label>
             <button type="submit" class="ps-button ps-button-primary">Iscriviti alla newsletter →</button>
             <p class="ps-body" style="margin: 0; font-size: 12px; color: var(--ps-muted);">

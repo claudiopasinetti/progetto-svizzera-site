@@ -83,7 +83,7 @@ const navItems = [
   { href: '/v2/faq', label: 'FAQ' },
   { href: '/v2/contatti', label: 'Contatti' },
 ];
-const BASE_URL = import.meta.env.BASE_URL;
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 ---
 
@@ -557,13 +557,13 @@ const BASE_URL = import.meta.env.BASE_URL;
         <span>
           Iscrizioni chiudono in <strong data-urgency-countdown>—</strong> · Casting {CASTING.nextDateDisplay}
         </span>
-        <a href={`${BASE_URL}v2/registrazione`}>Iscriviti →</a>
+        <a href={`${BASE_URL}/v2/registrazione`}>Iscriviti →</a>
       </div>
     </div>
 
     <nav class="ps-nav">
       <div class="ps-container ps-nav-row">
-        <a href={`${BASE_URL}v2/`} class="ps-nav-brand" aria-label="Progetto Svizzera — Home">
+        <a href={`${BASE_URL}/v2/`} class="ps-nav-brand" aria-label="Progetto Svizzera — Home">
           <span class="ps-nav-logo-badge">
             <Image src={psLogoColor} alt="Progetto Svizzera" widths={[160, 320]} sizes="160px" loading="eager" />
           </span>
@@ -572,7 +572,7 @@ const BASE_URL = import.meta.env.BASE_URL;
           {navItems.map((item) => (
             <a href={item.href}>{item.label}</a>
           ))}
-          <a href={`${BASE_URL}v2/registrazione`} class="ps-button ps-button-primary ps-button-sm">Iscriviti →</a>
+          <a href={`${BASE_URL}/v2/registrazione`} class="ps-button ps-button-primary ps-button-sm">Iscriviti →</a>
         </div>
         <button class="ps-nav-mobile-toggle" data-nav-toggle aria-label="Apri menu">Menu</button>
       </div>
@@ -588,10 +588,10 @@ const BASE_URL = import.meta.env.BASE_URL;
         <button class="ps-nav-mobile-toggle" data-nav-close aria-label="Chiudi menu">Chiudi</button>
       </div>
       <div class="ps-nav-sheet-links">
-        <a href={`${BASE_URL}v2/`}>Home</a>
+        <a href={`${BASE_URL}/v2/`}>Home</a>
         {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
       </div>
-      <a href={`${BASE_URL}v2/registrazione`} class="ps-button ps-button-primary" style="margin-top: 32px;">Iscriviti al casting →</a>
+      <a href={`${BASE_URL}/v2/registrazione`} class="ps-button ps-button-primary" style="margin-top: 32px;">Iscriviti al casting →</a>
     </aside>
 
     <main id="main">
@@ -614,19 +614,19 @@ const BASE_URL = import.meta.env.BASE_URL;
           <div>
             <p class="ps-footer-col-title">Percorso</p>
             <ul>
-              <li><a href={`${BASE_URL}v2/il-tuo-percorso`}>Il tuo percorso</a></li>
-              <li><a href={`${BASE_URL}v2/registrazione`}>Iscriviti al casting</a></li>
-              <li><a href={`${BASE_URL}v2/eventi`}>Prossimi casting</a></li>
-              <li><a href={`${BASE_URL}v2/testimonianze`}>Testimonianze</a></li>
+              <li><a href={`${BASE_URL}/v2/il-tuo-percorso`}>Il tuo percorso</a></li>
+              <li><a href={`${BASE_URL}/v2/registrazione`}>Iscriviti al casting</a></li>
+              <li><a href={`${BASE_URL}/v2/eventi`}>Prossimi casting</a></li>
+              <li><a href={`${BASE_URL}/v2/testimonianze`}>Testimonianze</a></li>
             </ul>
           </div>
           <div>
             <p class="ps-footer-col-title">Progetto</p>
             <ul>
-              <li><a href={`${BASE_URL}v2/chi-siamo`}>Chi siamo</a></li>
-              <li><a href={`${BASE_URL}v2/contatti`}>Contatti</a></li>
-              <li><a href={`${BASE_URL}v2/faq`}>FAQ</a></li>
-              <li><a href={`${BASE_URL}v2/newsletter`}>Newsletter</a></li>
+              <li><a href={`${BASE_URL}/v2/chi-siamo`}>Chi siamo</a></li>
+              <li><a href={`${BASE_URL}/v2/contatti`}>Contatti</a></li>
+              <li><a href={`${BASE_URL}/v2/faq`}>FAQ</a></li>
+              <li><a href={`${BASE_URL}/v2/newsletter`}>Newsletter</a></li>
             </ul>
           </div>
           <div>
@@ -638,8 +638,8 @@ const BASE_URL = import.meta.env.BASE_URL;
             </ul>
             <p class="ps-footer-col-title" style="margin-top: 24px;">Legal</p>
             <ul>
-              <li><a href={`${BASE_URL}v2/privacy-policy`}>Privacy Policy</a></li>
-              <li><a href={`${BASE_URL}v2/termini-servizio`}>Termini di servizio</a></li>
+              <li><a href={`${BASE_URL}/v2/privacy-policy`}>Privacy Policy</a></li>
+              <li><a href={`${BASE_URL}/v2/termini-servizio`}>Termini di servizio</a></li>
             </ul>
           </div>
         </div>

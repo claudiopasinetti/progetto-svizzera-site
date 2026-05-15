@@ -18,7 +18,7 @@ const faq = [
   { q: 'Posso parlare con qualcuno che ha già fatto il percorso?', a: 'Sì. Durante la giornata di selezione sono sempre presenti colleghe e colleghi già collocati. Se vuoi un contatto prima del casting, scrivici via email/WhatsApp.' },
   { q: 'Posso fissare una call conoscitiva senza casting?', a: 'In linea di massima preferiamo le call durante il casting per equità tra le candidature. Per richieste specifiche scrivici e valutiamo caso per caso.' },
 ];
-const BASE_URL = import.meta.env.BASE_URL;
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 ---
 
@@ -91,7 +91,7 @@ const BASE_URL = import.meta.env.BASE_URL;
         </div>
         <label class="ps-checkbox">
           <input type="checkbox" name="consent" required />
-          <span>Acconsento al trattamento dei miei dati per ricevere risposta. <a href={`${BASE_URL}v2/privacy-policy`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">Privacy Policy</a>.</span>
+          <span>Acconsento al trattamento dei miei dati per ricevere risposta. <a href={`${BASE_URL}/v2/privacy-policy`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="ps-button ps-button-primary" style="align-self: flex-start;">Invia messaggio →</button>
       </form>
@@ -111,7 +111,7 @@ const BASE_URL = import.meta.env.BASE_URL;
         ))}
       </div>
       <p class="ps-body" style="margin-top: 32px; font-size: 14px;">
-        <a href={`${BASE_URL}v2/faq`} class="ps-link-arrow">Vai a tutte le 17 domande</a>
+        <a href={`${BASE_URL}/v2/faq`} class="ps-link-arrow">Vai a tutte le 17 domande</a>
       </p>
     </div>
   </section>
