@@ -1,24 +1,159 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { CASTING } from '../data/config';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+import CostsTable from '../components/CostsTable.astro';
+import Differenziatore from '../components/Differenziatore.astro';
+import FadeIn from '../components/FadeIn.tsx';
+import JourneyPath from '../components/JourneyPath.tsx';
+import selectionDay from '../assets/swiss/selection-day-presentation.jpg';
+import contractAdhesion from '../assets/swiss/contract-adhesion.jpg';
+import germanOnline from '../assets/swiss/german-online-study.jpg';
+import swissRedCross from '../assets/swiss/swiss-red-cross-german-doc.jpg';
+import germanNursing from '../assets/swiss/german-nursing-online.jpg';
+import germanCv from '../assets/swiss/german-cv-application.jpg';
+import signingContract from '../assets/swiss/signing-contract.jpg';
+import journeyBg from '../assets/swiss/swiss-train-landscape.jpg';
+
+const title = 'Il tuo percorso';
+const description = 'Le 7 fasi del percorso Progetto Svizzera: dalla selezione alla firma del contratto in clinica. 7 mesi totali, formazione strutturata.';
+
+const steps = [
+  { n: 1, title: 'Giornata di selezione + colloquio', duration: 'mezza giornata online', body: 'Presentazione del progetto + colloquio individuale. Sono presenti colleghe già in Svizzera. Niente test, è una conversazione.', image: selectionDay },
+  { n: 2, title: 'Adesione al progetto', duration: 'entro 5-7 giorni dal casting', body: 'Se idonea, ricevi via email l\'Accordo di Adesione. Lo firmi, e parte il percorso.', image: contractAdhesion },
+  { n: 3, title: 'Tedesco A1/A2', duration: '12 settimane', body: 'Corsi intensivi online. Verifiche finali per accedere al livello successivo. Lessico medico introdotto da subito.', image: germanOnline },
+  { n: 4, title: 'Documenti + riconoscimento titolo SRK', duration: 'in parallelo, fino a 4 mesi', body: 'Avvio pratiche per il riconoscimento del titolo presso la Croce Rossa Svizzera. Ti seguiamo passo per passo: cosa serve, dove inviare, cosa aspettarti.', image: swissRedCross },
+  { n: 5, title: 'Tedesco B1/B2 settoriale infermieristico', duration: '12 settimane', body: 'Corso specialistico: lessico clinico, conversazione coi pazienti, scrittura cartella infermieristica. Si lavora anche sui colloqui.', image: germanNursing },
+  { n: 6, title: 'CV in tedesco + colloquio in clinica', duration: 'da fine mese 6', body: 'Redazione del CV tedesco, video di presentazione, candidatura presso le cliniche partner. Colloqui individuali con le strutture interessate.', image: germanCv },
+  { n: 7, title: 'Contratto + trasferimento + onboarding', duration: 'mese 7 + 3 mesi inserimento', body: 'Firmi il contratto direttamente con la clinica scelta. Onboarding linguistico (10 settimane in clinica) per consolidare il tedesco specialistico del tuo reparto.', image: signingContract },
+];
+
+const journeyMini = steps.map((s) => ({ n: s.n, title: s.title, duration: s.duration }));
 ---
 
-<Base
-  title="Il tuo percorso"
-  description="Il percorso Progetto Svizzera per infermieri italiani: selezione, formazione linguistica di 7-8 mesi, preparazione documenti e colloqui, trasferimento e inserimento lavorativo in Svizzera tedesca."
->
-  <section class="mx-auto max-w-5xl px-4 py-24 md:px-6">
-    <h1 class="font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl">
-      Il tuo percorso
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
-      Un percorso strutturato di circa 7–8 mesi: casting, formazione linguistica,
-      preparazione documentale, colloqui con le strutture sanitarie svizzere,
-      trasferimento e inserimento lavorativo.
-    </p>
+<Base title={title} description={description}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={journeyBg}
+        alt="Paesaggio svizzero"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/85"></div>
+    </div>
+    <div class="relative z-10 mx-auto max-w-5xl px-4 py-24 md:px-6 md:py-28">
+      <FadeIn client:load>
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Il percorso, mese per mese</p>
+        <h1 class="mt-3 font-display text-4xl font-bold text-brand-primary md:text-6xl">
+          7 mesi, 7 fasi.
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-brand-ink/85">
+          Dal casting al primo turno in reparto. Niente promesse rapide: il percorso dura quanto serve
+          a prepararti seriamente. Il {CASTING.stats.completionRate}% di chi lo completa firma un contratto.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
 
-    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Migrazione JourneyPathAnimation (timeline serpentina
-      7 step) come React island in Blocco 3.
+  {/* JourneyPath mini-mappa animata */}
+  <section class="bg-brand-muted/40 py-16">
+    <div class="mx-auto max-w-md px-4 md:px-6">
+      <FadeIn client:visible>
+        <p class="text-center text-sm font-semibold uppercase tracking-wider text-brand-secondary">Una mappa</p>
+        <h2 class="mt-2 text-center font-display text-2xl font-bold text-brand-primary">Il percorso, in sintesi</h2>
+      </FadeIn>
+      <JourneyPath client:visible steps={journeyMini} />
+    </div>
+  </section>
+
+  {/* 7 step in dettaglio con foto */}
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <ol class="space-y-12">
+        {steps.map((s, idx) => {
+          const isEven = idx % 2 === 0;
+          return (
+            <FadeIn client:visible delay={0.05}>
+              <li class:list={[
+                'flex flex-col gap-6 overflow-hidden rounded-lg border border-brand-border bg-white shadow-sm md:flex-row md:items-stretch',
+                !isEven && 'md:flex-row-reverse'
+              ]}>
+                <div class="md:w-2/5">
+                  <div class="aspect-[4/3] h-full w-full overflow-hidden bg-brand-muted">
+                    <Image
+                      src={s.image}
+                      alt={s.title}
+                      class="h-full w-full object-cover"
+                      loading="lazy"
+                      widths={[400, 800]}
+                      sizes="(min-width: 768px) 40vw, 100vw"
+                    />
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center p-6 md:w-3/5 md:p-8">
+                  <div class="flex items-center gap-3">
+                    <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-secondary font-display text-lg font-bold text-white">
+                      {s.n}
+                    </span>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted-foreground">{s.duration}</p>
+                  </div>
+                  <h2 class="mt-3 font-display text-xl font-bold text-brand-primary md:text-2xl">{s.title}</h2>
+                  <p class="mt-3 text-sm leading-relaxed text-brand-ink/80 md:text-base">{s.body}</p>
+                </div>
+              </li>
+            </FadeIn>
+          );
+        })}
+      </ol>
+
+      <FadeIn client:visible>
+        <p class="mt-12 rounded-md border-l-4 border-brand-secondary bg-brand-muted/50 p-5 text-sm leading-relaxed text-brand-ink/85">
+          <strong>Onestà sui mesi duri.</strong> I primi 3-4 mesi di tedesco sono i più impegnativi:
+          ~5 ore al giorno fra lezioni, esercizi e conversazione. Non è un percorso part-time.
+          Però non lo fai da sola: gruppo di studio, tutor dedicato, docenti madrelingua.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Costi */}
+  <section class="bg-brand-muted/40 py-20">
+    <div class="mx-auto max-w-4xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <CostsTable />
+      </FadeIn>
+    </div>
+  </section>
+
+  <Differenziatore />
+
+  {/* CTA dual */}
+  <section class="bg-brand-primary py-16">
+    <div class="mx-auto max-w-4xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-white md:text-3xl">
+          Pronta a iniziare il percorso?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-white/85">
+          Il prossimo casting è il {CASTING.nextDateDisplay}. Iscriviti entro il {CASTING.deadlineDisplay}.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a
+            href={PRIMARY_CTA.href}
+            class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-brand-secondary/90"
+          >
+            {PRIMARY_CTA.label}
+          </a>
+          <a
+            href={SECONDARY_CTA.href}
+            class="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 text-base font-semibold text-white backdrop-blur transition-all hover:scale-105 hover:bg-white/20"
+          >
+            {SECONDARY_CTA.label}
+          </a>
+        </div>
+      </FadeIn>
     </div>
   </section>
 </Base>

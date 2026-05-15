@@ -1,0 +1,90 @@
+---
+import BaseV2 from '../../layouts/BaseV2.astro';
+import Stripe from '../../components/v2/Stripe.astro';
+import { CASTING } from '../../data/config';
+
+const title = 'Resta aggiornata';
+const description = 'Iscriviti alla newsletter Progetto Svizzera: una email al mese, info sui prossimi casting, storie di chi ha completato il percorso. Niente spam.';
+
+const benefits = [
+  { t: 'Una email al mese, mai di più.', b: 'Niente spam, niente promo.' },
+  { t: 'Info sui prossimi casting', b: 'Tipicamente 4-6 settimane prima della deadline iscrizioni.' },
+  { t: 'Storie di chi ha completato il percorso', b: 'Come è andata, cosa si poteva fare meglio, com\'è la vita in CH.' },
+  { t: 'Aggiornamenti reali sul mestiere', b: 'Stipendi, ratio paziente-infermiere, novità riconoscimento titolo SRK.' },
+  { t: 'Disiscrizione in 1 click', b: 'In fondo a ogni email.' },
+];
+---
+
+<BaseV2 title={title} description={description}>
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container" style="padding-top: 120px; padding-bottom: 80px;">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Nessuna pressione</p>
+      <h1 class="ps-display ps-display-lg" style="margin: 32px 0 0; max-width: 1100px; color: var(--ps-on-dark);">
+        Resta aggiornata sui<br />
+        <span style="color: var(--ps-secondary);">prossimi casting.</span>
+      </h1>
+      <p class="ps-body ps-body-lg ps-body-strong" style="margin: 32px 0 0; max-width: 700px;">
+        Se non sei pronto/a a iscriverti adesso, va benissimo. Lascia solo l'email:
+        ti scriviamo prima del prossimo casting con un riassunto onesto e senza fretta.
+      </p>
+    </div>
+  </section>
+
+  <Stripe />
+
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--ps-hairline);" class="ps-newsletter-grid">
+        <div style="background: var(--ps-canvas-soft); padding: 56px 40px;">
+          <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Cosa riceverai</p>
+          <h2 class="ps-display" style="margin: 24px 0 0; font-size: 32px; line-height: 1.2; color: var(--ps-on-dark);">5 cose, una email.</h2>
+          <ul style="list-style: none; padding: 0; margin: 40px 0 0; display: flex; flex-direction: column; gap: 24px;">
+            {benefits.map((b) => (
+              <li style="display: flex; gap: 16px; align-items: flex-start;">
+                <span style="display: inline-block; width: 8px; height: 8px; background: var(--ps-secondary); margin-top: 8px; flex-shrink: 0;"></span>
+                <div>
+                  <p style="margin: 0; font-size: 15px; color: var(--ps-on-dark); font-weight: 500;">{b.t}</p>
+                  <p class="ps-body" style="margin: 4px 0 0; font-size: 14px;">{b.b}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p class="ps-body" style="margin-top: 40px; padding: 16px 20px; background: var(--ps-canvas-card); font-size: 13px; border-left: 4px solid var(--ps-secondary);">
+            Se sai già che vuoi candidarti al casting di {CASTING.nextDateDisplay},
+            <a href="/v2/registrazione" style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">vai direttamente all'iscrizione</a>.
+          </p>
+        </div>
+
+        <div style="background: var(--ps-canvas-card); padding: 56px 40px;">
+          <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Iscriviti</p>
+          <h2 class="ps-display" style="margin: 24px 0 32px; font-size: 32px; line-height: 1.2; color: var(--ps-on-dark);">Solo l'email.</h2>
+
+          <form action="/api/newsletter" method="POST" style="display: flex; flex-direction: column; gap: 24px;">
+            <div>
+              <label class="ps-input-label" for="nl-name">Nome (opzionale)</label>
+              <input id="nl-name" type="text" name="name" autocomplete="given-name" class="ps-input" placeholder="Come ti chiami?" />
+            </div>
+            <div>
+              <label class="ps-input-label" for="nl-email">Email *</label>
+              <input id="nl-email" type="email" name="email" required autocomplete="email" class="ps-input" placeholder="latuaemail@esempio.it" />
+            </div>
+            <label class="ps-checkbox">
+              <input type="checkbox" name="consent" required />
+              <span>Acconsento a ricevere comunicazioni email da Progetto Svizzera. Posso disiscrivermi in qualsiasi momento. <a href="/v2/privacy-policy" style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">Privacy</a>.</span>
+            </label>
+            <button type="submit" class="ps-button ps-button-primary">Iscriviti alla newsletter →</button>
+            <p class="ps-body" style="margin: 0; font-size: 12px; color: var(--ps-muted);">
+              ↳ Endpoint /api/newsletter in attivazione (Wave 2). Conferma email automatica dopo go-live.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseV2>
+
+<style>
+  @media (min-width: 900px) {
+    .ps-newsletter-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

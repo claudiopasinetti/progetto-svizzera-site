@@ -1,0 +1,724 @@
+---
+import { Image } from 'astro:assets';
+import { CONTACTS, BRAND, CASTING, SEO_DEFAULTS } from '../data/config';
+import psLogo from '../assets/swiss/progetto-svizzera-logo-white.png';
+import psLogoColor from '../assets/swiss/progetto-svizzera-logo.jpg';
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = SEO_DEFAULTS.title,
+  description = SEO_DEFAULTS.description,
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title.includes(BRAND.name) ? title : `${title} — ${BRAND.name}`;
+const canonical = new URL(Astro.url.pathname, BRAND.url).toString();
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${BRAND.url}#organization`,
+  name: BRAND.name,
+  url: BRAND.url,
+  logo: `${BRAND.url}/logo.png`,
+  description: 'Reclutamento e formazione di infermiere e infermieri italiani per cliniche della Svizzera tedesca. Dal 2018.',
+  foundingDate: '2018',
+  email: CONTACTS.email,
+  telephone: CONTACTS.phone,
+  sameAs: [CONTACTS.instagram, CONTACTS.facebook],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: BRAND.legal.company,
+    address: BRAND.legal.address,
+  },
+  areaServed: { '@type': 'Country', name: 'Svizzera' },
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${BRAND.url}#service`,
+  provider: { '@id': `${BRAND.url}#organization` },
+  name: 'Percorso completo per infermieri italiani in Svizzera tedesca',
+  serviceType: 'Reclutamento, formazione linguistica e coordinamento clinico',
+  description: 'Casting di selezione, 7 mesi di tedesco settoriale infermieristico, pratiche riconoscimento titolo SRK, colloqui con cliniche partner e accompagnamento fino al contratto diretto candidato-struttura.',
+  areaServed: { '@type': 'Country', name: 'Svizzera' },
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Infermieri italiani con laurea in Infermieristica',
+  },
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    eligibleRegion: { '@type': 'Country', name: 'IT' },
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${BRAND.url}#website`,
+  url: BRAND.url,
+  name: BRAND.name,
+  description: SEO_DEFAULTS.description,
+  inLanguage: BRAND.language,
+  publisher: { '@id': `${BRAND.url}#organization` },
+};
+
+const navItems = [
+  { href: '/v2/il-tuo-percorso', label: 'Il percorso' },
+  { href: '/v2/chi-siamo', label: 'Chi siamo' },
+  { href: '/v2/testimonianze', label: 'Voci' },
+  { href: '/v2/eventi', label: 'Selezioni' },
+  { href: '/v2/faq', label: 'FAQ' },
+  { href: '/v2/contatti', label: 'Contatti' },
+];
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={BRAND.name} />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#0F1F35" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <style is:global>
+      :root {
+        --ps-canvas: #0F1F35;
+        --ps-canvas-soft: #0a1626;
+        --ps-canvas-card: #18304b;
+        --ps-canvas-elevated: #1f3a59;
+        --ps-primary: #1E3A5F;
+        --ps-secondary: #B91C1C;
+        --ps-secondary-soft: #FCA5A5;
+        --ps-on-dark: #FFFFFF;
+        --ps-body: #B8C2D1;
+        --ps-body-strong: #E0E6EF;
+        --ps-muted: #7B8699;
+        --ps-hairline: #2a4262;
+        --ps-hairline-strong: #1f3554;
+      }
+      html { background: var(--ps-canvas); scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--ps-canvas);
+        color: var(--ps-on-dark);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 1.5;
+        font-feature-settings: 'cv11', 'ss01';
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      ::selection { background: var(--ps-secondary); color: var(--ps-on-dark); }
+
+      .ps-display {
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .ps-display-xl { font-size: clamp(48px, 7vw, 96px); }
+      .ps-display-lg { font-size: clamp(40px, 6vw, 80px); }
+      .ps-display-md { font-size: clamp(32px, 4vw, 56px); }
+      .ps-display-sm { font-size: clamp(24px, 3vw, 40px); }
+
+      .ps-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        line-height: 1.3;
+        margin: 0;
+      }
+      .ps-label-md {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        line-height: 1.3;
+      }
+
+      .ps-body {
+        font-size: 16px;
+        line-height: 1.6;
+        font-weight: 300;
+        color: var(--ps-body);
+      }
+      .ps-body-strong { color: var(--ps-body-strong); }
+      .ps-body-lg { font-size: 18px; line-height: 1.6; }
+
+      .ps-button {
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        line-height: 1;
+        padding: 18px 32px;
+        height: 52px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border: 1px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+        text-align: center;
+      }
+      .ps-button:hover { transform: translateY(-1px); }
+      .ps-button-primary {
+        background: var(--ps-secondary);
+        color: var(--ps-on-dark);
+        border-color: var(--ps-secondary);
+      }
+      .ps-button-primary:hover { background: #a01818; border-color: #a01818; }
+      .ps-button-outline {
+        background: transparent;
+        color: var(--ps-on-dark);
+        border-color: rgba(255,255,255,0.5);
+      }
+      .ps-button-outline:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
+      .ps-button-sm {
+        height: 40px;
+        padding: 12px 20px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+      }
+
+      .ps-stripe { height: 4px; background: var(--ps-secondary); }
+      .ps-stripe-tri {
+        height: 4px;
+        background: linear-gradient(90deg, var(--ps-primary) 0%, var(--ps-primary) 33%, var(--ps-canvas-elevated) 33%, var(--ps-canvas-elevated) 66%, var(--ps-secondary) 66%, var(--ps-secondary) 100%);
+      }
+      .ps-hairline { border: 0; height: 1px; background: var(--ps-hairline); margin: 0; }
+
+      .ps-section { padding-top: 96px; padding-bottom: 96px; }
+      .ps-band { padding-top: 64px; padding-bottom: 64px; }
+      .ps-container { max-width: 1440px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      .ps-container-narrow { max-width: 960px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+      @media (max-width: 768px) {
+        .ps-section { padding-top: 64px; padding-bottom: 64px; }
+        .ps-band { padding-top: 40px; padding-bottom: 40px; }
+        .ps-container, .ps-container-narrow { padding-left: 20px; padding-right: 20px; }
+      }
+
+      .ps-grid-1px { display: grid; gap: 1px; background: var(--ps-hairline); }
+      .ps-cell {
+        background: var(--ps-canvas-soft);
+        padding: 40px 32px;
+      }
+      .ps-cell-card { background: var(--ps-canvas-card); padding: 40px 32px; }
+
+      .ps-link-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--ps-on-dark);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 4px;
+        transition: border-color 180ms ease;
+      }
+      .ps-link-arrow:hover { border-color: var(--ps-secondary); }
+
+      details.ps-faq {
+        border-bottom: 1px solid var(--ps-hairline);
+        padding: 24px 0;
+      }
+      details.ps-faq[open] summary { color: var(--ps-on-dark); }
+      details.ps-faq summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: var(--ps-body-strong);
+        transition: color 180ms ease;
+      }
+      details.ps-faq summary::-webkit-details-marker { display: none; }
+      details.ps-faq summary::after {
+        content: '+';
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--ps-secondary);
+        transition: transform 180ms ease;
+        flex-shrink: 0;
+      }
+      details.ps-faq[open] summary::after { content: '−'; }
+      details.ps-faq .ps-faq-body {
+        margin-top: 16px;
+        color: var(--ps-body);
+        font-size: 15px;
+        line-height: 1.7;
+        font-weight: 300;
+        max-width: 720px;
+      }
+
+      .ps-input {
+        width: 100%;
+        background: var(--ps-canvas-card);
+        color: var(--ps-on-dark);
+        border: 1px solid var(--ps-hairline);
+        padding: 14px 16px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1.4;
+        height: 52px;
+        transition: border-color 180ms ease;
+      }
+      textarea.ps-input { height: auto; min-height: 140px; resize: vertical; }
+      .ps-input:focus { outline: none; border-color: var(--ps-on-dark); }
+      .ps-input::placeholder { color: var(--ps-muted); }
+      .ps-input-label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--ps-body-strong);
+      }
+      .ps-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--ps-body);
+        font-weight: 300;
+      }
+      .ps-checkbox input { margin-top: 4px; accent-color: var(--ps-secondary); }
+
+      @keyframes ps-marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      .ps-marquee {
+        display: flex;
+        gap: 32px;
+        width: max-content;
+        animation: ps-marquee 40s linear infinite;
+      }
+      .ps-marquee:hover { animation-play-state: paused; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .ps-marquee { animation: none; }
+        .ps-button:hover { transform: none; }
+      }
+
+      .ps-nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid #E5E7EB;
+      }
+      .ps-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+      }
+      .ps-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ps-nav-brand-bar {
+        width: 4px;
+        height: 28px;
+        background: var(--ps-secondary);
+      }
+      .ps-nav-logo-badge {
+        display: inline-flex;
+        align-items: center;
+        line-height: 0;
+      }
+      .ps-nav-logo-badge img {
+        height: 52px;
+        width: auto;
+        display: block;
+      }
+      @media (max-width: 480px) {
+        .ps-nav-logo-badge img { height: 40px; }
+      }
+      footer.ps-footer .ps-nav-logo-badge img {
+        height: 80px;
+      }
+      @media (max-width: 480px) {
+        footer.ps-footer .ps-nav-logo-badge img { height: 64px; }
+      }
+
+      .ps-skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 999;
+        background: var(--ps-secondary);
+        color: var(--ps-on-dark);
+        padding: 12px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        text-decoration: none;
+      }
+      .ps-skip-link:focus,
+      .ps-skip-link:focus-visible {
+        left: 16px;
+        top: 16px;
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+
+      .ps-urgency-banner {
+        display: none;
+        background: var(--ps-secondary);
+        color: var(--ps-on-dark);
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+      .ps-urgency-banner[data-active="true"] { display: block; }
+      .ps-urgency-banner[data-active="true"] + .ps-nav { top: 0; }
+      .ps-urgency-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 10px 24px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-align: center;
+      }
+      .ps-urgency-row a {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .ps-urgency-row a:hover { text-decoration: none; }
+      @media (max-width: 600px) {
+        .ps-urgency-row { font-size: 11px; padding: 8px 16px; gap: 10px; letter-spacing: 0.06em; }
+      }
+      .ps-nav-links { display: none; align-items: center; gap: 28px; }
+      .ps-nav-links a {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--ps-primary);
+        font-weight: 700;
+        transition: color 180ms ease;
+      }
+      .ps-nav-links a:hover { color: var(--ps-secondary); }
+      .ps-nav-mobile-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: 1px solid var(--ps-primary);
+        color: var(--ps-primary);
+        font-family: inherit;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+        padding: 10px 16px;
+        cursor: pointer;
+      }
+      .ps-nav-sheet {
+        position: fixed;
+        inset: 0;
+        background: var(--ps-canvas);
+        z-index: 100;
+        display: none;
+        flex-direction: column;
+        padding: 24px;
+      }
+      .ps-nav-sheet[data-open="true"] { display: flex; }
+      .ps-nav-sheet-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--ps-hairline);
+      }
+      .ps-nav-sheet-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 32px;
+      }
+      .ps-nav-sheet-links a {
+        font-family: inherit;
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--ps-hairline);
+        color: var(--ps-on-dark);
+      }
+
+      @media (min-width: 900px) {
+        .ps-nav-links { display: flex; }
+        .ps-nav-mobile-toggle { display: none; }
+      }
+
+      footer.ps-footer {
+        background: var(--ps-canvas);
+        border-top: 1px solid var(--ps-hairline-strong);
+      }
+      .ps-footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+      }
+      .ps-footer-col-title {
+        margin: 0 0 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--ps-on-dark);
+      }
+      .ps-footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ps-footer ul a {
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--ps-body);
+        transition: color 180ms ease;
+      }
+      .ps-footer ul a:hover { color: var(--ps-on-dark); }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="ps-skip-link">Salta al contenuto</a>
+
+    <div class="ps-urgency-banner" data-urgency-banner data-deadline-iso={CASTING.deadlineIso} aria-live="polite">
+      <div class="ps-urgency-row">
+        <span>
+          Iscrizioni chiudono in <strong data-urgency-countdown>—</strong> · Casting {CASTING.nextDateDisplay}
+        </span>
+        <a href="/v2/registrazione">Iscriviti →</a>
+      </div>
+    </div>
+
+    <nav class="ps-nav">
+      <div class="ps-container ps-nav-row">
+        <a href="/v2" class="ps-nav-brand" aria-label="Progetto Svizzera — Home">
+          <span class="ps-nav-logo-badge">
+            <Image src={psLogoColor} alt="Progetto Svizzera" widths={[160, 320]} sizes="160px" loading="eager" />
+          </span>
+        </a>
+        <div class="ps-nav-links">
+          {navItems.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+          <a href="/v2/registrazione" class="ps-button ps-button-primary ps-button-sm">Iscriviti →</a>
+        </div>
+        <button class="ps-nav-mobile-toggle" data-nav-toggle aria-label="Apri menu">Menu</button>
+      </div>
+    </nav>
+
+    <aside class="ps-nav-sheet" data-nav-sheet aria-hidden="true">
+      <div class="ps-nav-sheet-top">
+        <div class="ps-nav-brand">
+          <span class="ps-nav-logo-badge">
+            <Image src={psLogo} alt="Progetto Svizzera" widths={[160, 320]} sizes="160px" loading="eager" />
+          </span>
+        </div>
+        <button class="ps-nav-mobile-toggle" data-nav-close aria-label="Chiudi menu">Chiudi</button>
+      </div>
+      <div class="ps-nav-sheet-links">
+        <a href="/v2">Home</a>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+      <a href="/v2/registrazione" class="ps-button ps-button-primary" style="margin-top: 32px;">Iscriviti al casting →</a>
+    </aside>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="ps-footer">
+      <div class="ps-container" style="padding-top: 80px; padding-bottom: 32px;">
+        <div class="ps-footer-grid">
+          <div>
+            <div class="ps-nav-brand" style="margin-bottom: 24px;">
+              <span class="ps-nav-logo-badge">
+                <Image src={psLogo} alt="Progetto Svizzera" widths={[160, 320]} sizes="160px" loading="lazy" />
+              </span>
+            </div>
+            <p class="ps-body" style="font-size: 13px;">
+              Reclutamento e formazione di infermiere e infermieri italiani per cliniche della Svizzera tedesca. Dal 2018.
+            </p>
+          </div>
+          <div>
+            <p class="ps-footer-col-title">Percorso</p>
+            <ul>
+              <li><a href="/v2/il-tuo-percorso">Il tuo percorso</a></li>
+              <li><a href="/v2/registrazione">Iscriviti al casting</a></li>
+              <li><a href="/v2/eventi">Prossimi casting</a></li>
+              <li><a href="/v2/testimonianze">Testimonianze</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="ps-footer-col-title">Progetto</p>
+            <ul>
+              <li><a href="/v2/chi-siamo">Chi siamo</a></li>
+              <li><a href="/v2/contatti">Contatti</a></li>
+              <li><a href="/v2/faq">FAQ</a></li>
+              <li><a href="/v2/newsletter">Newsletter</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="ps-footer-col-title">Contatti</p>
+            <ul>
+              <li><a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a></li>
+              <li><a href={`tel:${CONTACTS.phone}`}>{CONTACTS.phoneDisplay}</a></li>
+              <li><a href={CONTACTS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+            </ul>
+            <p class="ps-footer-col-title" style="margin-top: 24px;">Legal</p>
+            <ul>
+              <li><a href="/v2/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/v2/termini-servizio">Termini di servizio</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr class="ps-hairline" style="margin: 56px 0 24px;" />
+        <p style="margin: 0; font-size: 11px; color: var(--ps-muted); font-weight: 300; letter-spacing: 0.05em;">
+          {BRAND.legal.company} · {BRAND.legal.address}
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const toggleBtn = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+      const closeBtn = document.querySelector<HTMLButtonElement>('[data-nav-close]');
+      const sheet = document.querySelector<HTMLElement>('[data-nav-sheet]');
+      let lastFocusedBeforeOpen: HTMLElement | null = null;
+
+      function getFocusable(el: HTMLElement): HTMLElement[] {
+        return Array.from(
+          el.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        );
+      }
+
+      function setOpen(open: boolean) {
+        if (!sheet) return;
+        sheet.dataset.open = String(open);
+        sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) {
+          lastFocusedBeforeOpen = document.activeElement as HTMLElement;
+          const focusables = getFocusable(sheet);
+          focusables[0]?.focus();
+        } else {
+          lastFocusedBeforeOpen?.focus();
+        }
+      }
+
+      toggleBtn?.addEventListener('click', () => setOpen(true));
+      closeBtn?.addEventListener('click', () => setOpen(false));
+      sheet?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (!sheet || sheet.dataset.open !== 'true') return;
+        if (e.key === 'Escape') {
+          setOpen(false);
+          return;
+        }
+        if (e.key !== 'Tab') return;
+        const focusables = getFocusable(sheet);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      });
+
+      const banner = document.querySelector<HTMLElement>('[data-urgency-banner]');
+      const countdownEl = document.querySelector<HTMLElement>('[data-urgency-countdown]');
+      function updateUrgencyBanner() {
+        if (!banner || !countdownEl) return;
+        const iso = banner.dataset.deadlineIso;
+        if (!iso) return;
+        const target = new Date(iso).getTime();
+        const now = Date.now();
+        const diffMs = target - now;
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        if (diffMs <= 0 || diffDays > 14) {
+          banner.dataset.active = 'false';
+          return;
+        }
+        banner.dataset.active = 'true';
+        countdownEl.textContent = diffDays === 1 ? '1 giorno' : `${diffDays} giorni`;
+      }
+      updateUrgencyBanner();
+      setInterval(updateUrgencyBanner, 60 * 60 * 1000);
+    </script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 ---
-import { NAV_ITEMS, PRIMARY_CTA } from '../data/navigation';
+import { NAV_ITEMS, PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
 import { BRAND } from '../data/config';
 
 const currentPath = Astro.url.pathname;
@@ -38,7 +38,6 @@ const isActive = (href: string) =>
       </a>
     </nav>
 
-    {/* Mobile menu: <details> nativo per Blocco 1, sostituito con shadcn Sheet React island in Blocco 2 */}
     <details class="md:hidden relative">
       <summary
         class="list-none inline-flex h-10 w-10 items-center justify-center rounded-md text-brand-ink cursor-pointer"
@@ -74,6 +73,12 @@ const isActive = (href: string) =>
           class="mt-2 block rounded-md bg-brand-secondary px-3 py-2 text-center text-sm font-semibold text-white hover:bg-brand-secondary/90"
         >
           {PRIMARY_CTA.label}
+        </a>
+        <a
+          href={SECONDARY_CTA.href}
+          class="mt-1 block rounded-md border border-brand-border px-3 py-2 text-center text-sm font-semibold text-brand-ink hover:border-brand-primary hover:text-brand-primary"
+        >
+          {SECONDARY_CTA.label}
         </a>
       </div>
     </details>

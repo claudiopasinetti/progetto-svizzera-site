@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#0F1F35"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="#B91C1C" opacity="0.18">
+    <circle cx="1020" cy="120" r="180"/>
+    <circle cx="1100" cy="500" r="120"/>
+  </g>
+  <g font-family="Montserrat, system-ui, sans-serif" fill="#ffffff">
+    <text x="80" y="170" font-size="32" font-weight="600" letter-spacing="6" opacity="0.7">PROGETTO SVIZZERA</text>
+    <text x="80" y="320" font-size="84" font-weight="800" letter-spacing="-2">Lavorare nella</text>
+    <text x="80" y="410" font-size="84" font-weight="800" letter-spacing="-2">
+      Svizzera <tspan fill="#FCA5A5">tedesca</tspan>.
+    </text>
+  </g>
+  <g transform="translate(80, 500)">
+    <rect x="0" y="0" width="320" height="60" rx="6" fill="#B91C1C"/>
+    <text x="20" y="40" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#ffffff">Casting · 23 maggio 2026</text>
+  </g>
+  <text x="80" y="595" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#ffffff" opacity="0.55">progetto-svizzera.it · Dal 2018, 150 colleghe in reparto</text>
+</svg>

@@ -1,43 +1,313 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { CASTING } from '../data/config';
-import { PRIMARY_CTA as CTA } from '../data/navigation';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+import Differenziatore from '../components/Differenziatore.astro';
+import PerChiE from '../components/PerChiE.astro';
+import CostsTable from '../components/CostsTable.astro';
+import WhyCH from '../components/WhyCH.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+import CountdownCasting from '../components/CountdownCasting.tsx';
+import AnimatedCounter from '../components/AnimatedCounter.tsx';
+import FadeIn from '../components/FadeIn.tsx';
+import heroNursing from '../assets/swiss/hero-nursing.jpg';
+
+const homeFaq = [
+  {
+    q: 'Devo già parlare tedesco per partecipare al casting?',
+    a: 'No. Il percorso parte dal livello A1 e ti accompagna fino al B1/B2 settoriale infermieristico in 7 mesi. Tutte le 150 persone collocate dal 2018 sono partite senza tedesco o quasi.',
+  },
+  {
+    q: 'Quanto costa il percorso?',
+    a: 'I corsi linguistici A1/A2 e B1/B2 sono a tuo carico (indicativamente ~600-750€ ciascuno). Il riconoscimento titolo SRK è ~700 CHF, saldabile a fine percorso. Trasferimento e formazione interna in clinica sono a carico della struttura. Niente trattenute sullo stipendio.',
+  },
+  {
+    q: 'Che contratto firmo? Sono vincolata a Progetto Svizzera?',
+    a: 'Il contratto di lavoro lo firmi direttamente con la clinica svizzera, non con noi. Nessun vincolo di permanenza, nessuna penale se cambi idea. Il nostro lavoro finisce all\'inserimento.',
+  },
+  {
+    q: 'Come avete fatto a collocare 150 persone?',
+    a: '11 casting dal 2018, una pipeline di candidati selezionati e cliniche che cercano attivamente personale italiano. Il 95% di chi completa il percorso trova un contratto: questo perché partiamo solo se ci sono aperture concrete.',
+  },
+  {
+    q: 'Cosa succede se mollo a metà?',
+    a: 'Onestamente: i primi 4 mesi di tedesco sono i più duri. Se ti accorgi che non fa per te, smetti senza penali. Non è un percorso per chiunque, è un percorso per chi è motivata a farlo per davvero.',
+  },
+];
 ---
 
 <Base>
-  <section class="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32">
-    <div class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
-        Selezioni 2026
-      </p>
-      <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl lg:text-7xl">
-        Lavora come infermiere nella
-        <span class="text-brand-secondary">Svizzera tedesca</span>
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
-        Attivo dal {CASTING.stats.activeSince}, Progetto Svizzera ha accompagnato
-        {CASTING.stats.placed} infermieri italiani in strutture sanitarie svizzere.
-        Il prossimo casting è il <strong>{CASTING.nextDateDisplay}</strong>, online.
-      </p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <a
-          href={CTA.href}
-          class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-brand-secondary/90"
-        >
-          {CTA.label}
-        </a>
-        <a
-          href="/il-tuo-percorso"
-          class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-base font-semibold text-brand-ink transition-colors hover:border-brand-primary hover:text-brand-primary"
-        >
-          Scopri il percorso
-        </a>
-      </div>
+  {/* Hero — full-bleed photo + overlay + box countdown */}
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={heroNursing}
+        alt="Infermiera in reparto in Svizzera tedesca"
+        class="h-full w-full object-cover"
+        loading="eager"
+        priority
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40 md:from-white/92 md:via-white/70 md:to-white/20"></div>
     </div>
 
-    <div class="mt-20 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Migrazione completa SwissHome.tsx
-      (numeri, testimonianze, video, Typeform embed) in Blocco 3.
+    <div class="relative z-10 mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32 lg:py-36">
+      <div class="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center">
+        <FadeIn client:load duration={0.7}>
+          <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
+            Casting {CASTING.nextDateDisplay} · online
+          </p>
+          <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl lg:text-7xl">
+            Lavorare nella <span class="text-brand-secondary">Svizzera tedesca</span>.
+          </h1>
+          <p class="mt-3 font-display text-2xl font-semibold text-brand-ink/80 md:text-3xl">
+            Non è una fuga, è un percorso.
+          </p>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink/85">
+            Dal {CASTING.stats.activeSince} accompagniamo infermiere italiane a Zurigo, Berna, San Gallo:
+            {' '}<strong>{CASTING.stats.totalCastings} casting</strong>,
+            {' '}<strong>{CASTING.stats.placed} colleghe</strong> già in reparto,
+            {' '}<strong>{CASTING.stats.completionRate}% completion rate</strong>.
+            Non parti da sola, non parti da zero nel vuoto.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-3">
+            <a
+              href={PRIMARY_CTA.href}
+              class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-brand-secondary/90 hover:shadow-xl"
+            >
+              {PRIMARY_CTA.label}
+            </a>
+            <a
+              href={SECONDARY_CTA.href}
+              class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-base font-semibold text-brand-ink transition-all hover:scale-[1.02] hover:border-brand-primary hover:text-brand-primary"
+            >
+              Non sei pronta? {SECONDARY_CTA.label}
+            </a>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load delay={0.3} y={40}>
+          <aside class="rounded-lg border border-brand-secondary/40 bg-white/95 p-6 shadow-2xl backdrop-blur md:p-8">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-secondary">Prossimo casting</p>
+            <p class="mt-2 font-display text-3xl font-bold text-brand-primary">{CASTING.nextDateDisplay}</p>
+            <p class="mt-1 text-sm text-brand-muted-foreground">Online · {CASTING.duration} a candidata</p>
+
+            <div class="mt-6 rounded-md bg-brand-muted/60 p-4">
+              <p class="text-xs uppercase tracking-wider text-brand-muted-foreground">Mancano alla deadline</p>
+              <p class="mt-1 font-mono text-xl font-semibold text-brand-primary tabular-nums">
+                <CountdownCasting client:idle targetIso={CASTING.deadlineIso} expiredLabel="Iscrizioni chiuse per maggio" />
+              </p>
+              <p class="mt-1 text-xs text-brand-muted-foreground">
+                Iscrizioni aperte fino al {CASTING.deadlineDisplay}
+              </p>
+            </div>
+
+            <a
+              href={PRIMARY_CTA.href}
+              class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-brand-secondary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-secondary/90"
+            >
+              Iscriviti al casting →
+            </a>
+          </aside>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+
+  {/* Stats animati */}
+  <section class="border-y border-brand-border bg-brand-muted/40 py-16">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <div class="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.activeSince} duration={1.5} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Anno di nascita</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.totalCastings} duration={1.5} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Casting svolti</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.placed} suffix="+" duration={2} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Colleghe collocate</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.completionRate} suffix="%" duration={2} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Completion rate</p>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Il progetto in 30 secondi */}
+  <section class="bg-white py-16 md:py-20">
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Il progetto in breve</p>
+        <h2 class="mt-2 font-display text-3xl font-bold text-brand-primary md:text-4xl">
+          Cosa facciamo, in tre frasi.
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-brand-ink/85">
+          Selezioniamo infermiere italiane motivate a lavorare nella Svizzera tedesca. Le formiamo in tedesco
+          per 7 mesi (A1 fino al B1/B2 settoriale infermieristico) e prepariamo i documenti per il riconoscimento titolo
+          presso la Croce Rossa Svizzera.
+        </p>
+        <p class="mt-3 text-lg leading-relaxed text-brand-ink/85">
+          Le presentiamo alle cliniche partner: i colloqui sono individuali, la decisione finale di dove lavorare è loro.
+          Il contratto lo firmano direttamente con la struttura.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Perché la Svizzera tedesca — 6 cards con foto */}
+  <WhyCH />
+
+  <PerChiE />
+
+  <Differenziatore />
+
+  {/* Costi */}
+  <section class="bg-white py-20 md:py-24">
+    <div class="mx-auto max-w-4xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <div class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Niente costi nascosti</p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-brand-primary md:text-4xl">
+            Quanto costa il percorso, davvero
+          </h2>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.15}>
+        <CostsTable />
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Testimonial mini */}
+  <section class="bg-brand-muted/40 py-20 md:py-24">
+    <div class="mx-auto max-w-7xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <div class="mb-10 max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Storie reali</p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-brand-primary md:text-4xl">
+            Le persone che ci sono già passate
+          </h2>
+        </div>
+      </FadeIn>
+
+      {/* TODO V7+V8 — testimonial verificati con consenso clinica + reparto + città */}
+      <div class="grid gap-6 md:grid-cols-3">
+        <FadeIn client:visible delay={0.1}>
+          <TestimonialCard
+            name="Annalisa D.R."
+            city="[Città Italia]"
+            clinic="[Clinica CH]"
+            reparto="[Reparto]"
+            quote="Pensavo fosse un'impresa ardua, partivo da zero col tedesco. I docenti mi hanno seguita passo dopo passo per un anno: con l'impegno quotidiano si arriva."
+            rating={5}
+          />
+        </FadeIn>
+        <FadeIn client:visible delay={0.2}>
+          <TestimonialCard
+            name="Federico C."
+            city="[Città Italia]"
+            clinic="[Clinica CH]"
+            reparto="[Reparto]"
+            quote="I primi 4 mesi di tedesco sono stati duri, non lo nascondo. Ma non ero solo: il gruppo di studio fa la differenza."
+            rating={4}
+          />
+        </FadeIn>
+        <FadeIn client:visible delay={0.3}>
+          <TestimonialCard
+            name="Roberta A."
+            city="[Città Italia]"
+            clinic="[Clinica CH]"
+            reparto="[Reparto]"
+            quote="Avevo 32 anni, un mutuo e un fidanzato. Pensavo fosse troppo tardi per ricominciare. Non lo era."
+            rating={4}
+            highlight={true}
+          />
+        </FadeIn>
+      </div>
+
+      <FadeIn client:visible delay={0.4}>
+        <div class="mt-10 text-center">
+          <a
+            href="/testimonianze"
+            class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-sm font-semibold text-brand-ink transition-all hover:scale-[1.02] hover:border-brand-primary hover:text-brand-primary"
+          >
+            Leggi tutte le storie →
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* FAQ inline */}
+  <section class="bg-white py-20 md:py-24">
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <div class="mb-10">
+          <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Domande frequenti</p>
+          <h2 class="mt-2 font-display text-3xl font-bold text-brand-primary md:text-4xl">
+            Le 5 cose che chiedono tutte
+          </h2>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.15}>
+        <FAQAccordion client:visible items={homeFaq} />
+      </FadeIn>
+      <p class="mt-6 text-center text-sm text-brand-muted-foreground">
+        <a href="/faq" class="font-semibold text-brand-secondary hover:underline">Vai a tutte le 17 domande →</a>
+      </p>
+    </div>
+  </section>
+
+  {/* CTA finale dual */}
+  <section class="relative overflow-hidden bg-brand-primary py-20 md:py-24">
+    <div class="absolute inset-0 z-0 opacity-20">
+      <Image
+        src={heroNursing}
+        alt=""
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+    </div>
+    <div class="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-3xl font-bold text-white md:text-4xl">
+          Pronta a iniziare il tuo percorso?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-white/85">
+          Il prossimo casting è il {CASTING.nextDateDisplay}. Iscriviti entro il {CASTING.deadlineDisplay}.
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+          <a
+            href={PRIMARY_CTA.href}
+            class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-brand-secondary/90 hover:shadow-xl"
+          >
+            {PRIMARY_CTA.label}
+          </a>
+          <a
+            href={SECONDARY_CTA.href}
+            class="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 text-base font-semibold text-white backdrop-blur transition-all hover:scale-105 hover:bg-white/20"
+          >
+            {SECONDARY_CTA.label}
+          </a>
+        </div>
+      </FadeIn>
     </div>
   </section>
 </Base>

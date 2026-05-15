@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import BaseV2 from '../../layouts/BaseV2.astro';
+import HeroBand from '../../components/v2/HeroBand.astro';
+import CtaBand from '../../components/v2/CtaBand.astro';
+import SectionHeader from '../../components/v2/SectionHeader.astro';
+import Stripe from '../../components/v2/Stripe.astro';
+import { CASTING, BRAND } from '../../data/config';
+import swissAlpsLandscape from '../../assets/swiss/swiss-alps-real.jpg';
+import operatingRoom from '../../assets/swiss/operating-room.jpg';
+import peterGigerImg from '../../assets/swiss/team-peter-giger-new.png';
+import beatriceBernardiniImg from '../../assets/swiss/team-beatrice-bernardini-final.png';
+import barbaraBernardiniImg from '../../assets/swiss/team-barbara-bernardini.png';
+import mandyMattheyImg from '../../assets/swiss/team-mandy-matthey-final.png';
+import magdaleneNoldeImg from '../../assets/swiss/team-magdalene-nolde.jpg';
+import wolframKrausImg from '../../assets/swiss/team-wolfram-kraus-final.png';
+import johannaJaudasImg from '../../assets/swiss/team-johanna-jaudas.jpg';
+
+const title = 'Chi siamo';
+const description = 'Progetto Svizzera nasce nel 2018 per accompagnare infermiere e infermieri italiani verso la Svizzera tedesca. Team Eumedica + Language Lab + docenti madrelingua.';
+
+const team = [
+  { name: 'Peter Giger', role: 'Intermediazione e collocamento', body: 'Coordina i rapporti con le cliniche svizzere e segue chi si candida dalla firma del contratto fino all\'inserimento.', image: peterGigerImg },
+  { name: 'Beatrice Bernardini', role: 'Formazione linguistica', body: 'Supervisiona il percorso linguistico, monitora i progressi delle persone in formazione, prepara ai colloqui con le strutture.', image: beatriceBernardiniImg },
+  { name: 'Barbara Bernardini', role: 'Coordinamento candidature + Docenza', body: 'È la prima persona con cui parli quando ti iscrivi. Coordina la pipeline candidature e affianca l\'attività di docenza.', image: barbaraBernardiniImg },
+  { name: 'Mandy Matthey', role: 'Docente · Tedesco settoriale', body: 'Insegna e sviluppa i percorsi di tedesco professionale per il settore sanitario.', image: mandyMattheyImg },
+  { name: 'Magdalene Nolde', role: 'Docente · Madrelingua DAF', body: 'Madrelingua tedesca con esperienza decennale come docente DAF, specializzata nel settore infermieristico.', image: magdaleneNoldeImg },
+  { name: 'Wolfram Kraus', role: 'Docente · Politico-economico-sanitario', body: 'Insegnante con esperienza pluriennale, grammatica, interpretariato e traduzioni in ambito sanitario.', image: wolframKrausImg },
+  { name: 'Johanna Jaudas', role: 'Docente · Madrelingua DAF', body: 'Madrelingua tedesca con oltre 10 anni di esperienza nell\'insegnamento, generale e settore infermieristico.', image: johannaJaudasImg },
+];
+
+const values = [
+  { title: 'Onestà', body: 'Ti diciamo subito quanto costa, quanto dura, cosa serve. Niente sorprese a metà percorso.' },
+  { title: 'Strutturato', body: 'Niente fai-da-te. Programma a moduli, verifiche di livello, gruppo di studio, tutor dedicato.' },
+  { title: 'Selettivo', body: 'Non collochiamo a volume. Le cliniche partner cercano professionisti e professioniste preparati, non numeri.' },
+  { title: 'Continuità', body: 'Ti seguiamo dalla giornata di selezione fino al primo turno in reparto. Poi sei libera.' },
+];
+---
+
+<BaseV2 title={title} description={description}>
+  <HeroBand image={swissAlpsLandscape} alt="Paesaggio alpino svizzero" eyebrow="Chi siamo" minHeight="560px">
+    <h1 class="ps-display ps-display-lg" style="max-width: 1000px; color: var(--ps-on-dark);">
+      Progetto Svizzera,<br />
+      <span style="color: var(--ps-secondary);">dal {CASTING.stats.activeSince}.</span>
+    </h1>
+    <p style="margin: 40px 0 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: var(--ps-body-strong); font-weight: 300;">
+      Un progetto nato per accompagnare infermiere e infermieri italiani verso un sistema sanitario
+      che riconosce la professione. Lavoriamo con cliniche svizzere selezionate, una scuola di tedesco
+      specializzata sul settore sanitario, e con docenti madrelingua. Organizziamo noi i colloqui con
+      le strutture, il contratto di lavoro lo firmi direttamente con la clinica: niente trattenute
+      sullo stipendio, niente vincoli di permanenza.
+    </p>
+  </HeroBand>
+
+  <Stripe />
+
+  <section style="background: var(--ps-canvas-soft);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Il team" title="Le persone con cui parli durante il percorso." body="Beatrice è la voce del casting. Barbara è la prima persona che ti risponde quando ti iscrivi." />
+      <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--ps-hairline);">
+        {team.map((m) => (
+          <article style="background: var(--ps-canvas); padding: 32px;">
+            <div style="aspect-ratio: 1; overflow: hidden; margin-bottom: 24px; background: var(--ps-canvas-card);">
+              <Image src={m.image} alt={`${m.name}, ${m.role}`} loading="lazy" widths={[280, 560]} sizes="280px" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.15);" />
+            </div>
+            <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0 0 8px;">{m.role}</p>
+            <h3 class="ps-display" style="font-size: 22px; line-height: 1.2; color: var(--ps-on-dark);">{m.name}</h3>
+            <p class="ps-body" style="margin: 16px 0 0; font-size: 14px; line-height: 1.6;">{m.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Come lavoriamo" title="Quattro principi operativi." />
+      <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--ps-hairline);">
+        {values.map((v) => (
+          <div class="ps-cell" style="padding: 48px 32px;">
+            <p class="ps-display" style="font-size: 28px; line-height: 1.1; color: var(--ps-on-dark);">{v.title}</p>
+            <p class="ps-body" style="margin: 20px 0 0; font-size: 15px; line-height: 1.6;">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas-soft); border-top: 1px solid var(--ps-hairline-strong);">
+    <div class="ps-container-narrow ps-section">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Eumedica + Language Lab</p>
+      <h2 class="ps-display ps-display-md" style="margin: 24px 0 0; max-width: 800px; color: var(--ps-on-dark);">
+        Due realtà operative, un progetto.
+      </h2>
+      <p class="ps-body ps-body-lg ps-body-strong" style="margin: 32px 0 0; max-width: 720px;">
+        Operativamente Progetto Svizzera è gestito da <strong>{BRAND.legal.company}</strong>
+        ({BRAND.legal.address}) per il coordinamento clinico-amministrativo,
+        e da <strong>Language Lab</strong> per la formazione linguistica.
+      </p>
+      <p class="ps-body" style="margin: 16px 0 0; max-width: 720px;">
+        Il progetto è attivo dal {CASTING.stats.activeSince}: precedentemente si chiamava "Svizzera Arrivo",
+        ha cambiato nome e si è strutturato meglio mantenendo gli stessi obiettivi.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand image={operatingRoom} alt="Reparto ospedaliero" headlineMain="Vuoi conoscerci di persona?" headlineAccent="Ti aspettiamo al casting." body="Ogni casting è un'occasione per parlare con noi senza impegno." />
+</BaseV2>

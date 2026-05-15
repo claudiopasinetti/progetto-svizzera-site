@@ -1,0 +1,181 @@
+---
+import BaseV2 from '../../layouts/BaseV2.astro';
+import Stripe from '../../components/v2/Stripe.astro';
+import CtaBand from '../../components/v2/CtaBand.astro';
+import { CASTING, BRAND } from '../../data/config';
+import operatingRoom from '../../assets/swiss/operating-room.jpg';
+
+const title = 'Domande frequenti';
+const description = 'Cos\'è Progetto Svizzera, come funziona, chi può partecipare, quanto dura il percorso, riconoscimento titolo SRK, costi, contratto: tutte le risposte in formato chiaro e conversazionale.';
+
+const sections = [
+  {
+    title: 'Cos\'è Progetto Svizzera',
+    items: [
+      {
+        q: 'Cos\'è Progetto Svizzera?',
+        a: `Progetto Svizzera è un programma di formazione linguistica e coordinamento clinico attivo dal ${CASTING.stats.activeSince} che accompagna infermiere e infermieri italiani al lavoro nella Svizzera tedesca. Dal ${CASTING.stats.activeSince} ha collocato ${CASTING.stats.placed} persone in cliniche svizzere, con un completion rate del ${CASTING.stats.completionRate}%.`,
+      },
+      {
+        q: 'Come funziona Progetto Svizzera in pratica?',
+        a: 'Il percorso è composto da 5 fasi: (1) casting online individuale di 20 minuti, (2) corso di tedesco settoriale infermieristico A1→B1/B2 in 7 mesi, (3) preparazione dei documenti per il riconoscimento titolo presso la Croce Rossa Svizzera (SRK), (4) presentazione alle cliniche partner, (5) firma del contratto di lavoro direttamente con la clinica scelta.',
+      },
+      {
+        q: 'Chi gestisce Progetto Svizzera?',
+        a: `${BRAND.legal.company} (Florida, US) per il coordinamento clinico-amministrativo e Language Lab per la formazione linguistica. La voce del casting è Beatrice Bernardini; la prima persona di contatto è Barbara Bernardini. La docenza linguistica è affidata a docenti madrelingua tedesca specializzati nel settore sanitario.`,
+      },
+      {
+        q: 'Progetto Svizzera è un\'agenzia di collocamento?',
+        a: 'No. Progetto Svizzera è una scuola di tedesco settoriale infermieristico + un coordinamento clinico. Non vende placement, non prende commissioni sul contratto di lavoro, non firma il contratto. Organizziamo noi i colloqui con le cliniche partner, ma il rapporto di lavoro nasce direttamente tra la persona candidata e la clinica svizzera.',
+      },
+    ],
+  },
+  {
+    title: 'Chi può partecipare',
+    items: [
+      {
+        q: 'Quali requisiti servono per partecipare al casting di Progetto Svizzera?',
+        a: 'Servono due requisiti formali: laurea triennale in infermieristica e cittadinanza di un paese UE. L\'esperienza professionale è un plus ma non un requisito bloccante: anche persone neolaureate motivate hanno completato il percorso e firmato contratti.',
+      },
+      {
+        q: 'Serve già conoscere il tedesco per partecipare al casting?',
+        a: `No. Il percorso linguistico parte dal livello A1 (zero conoscenze) e accompagna fino al B1/B2 settoriale infermieristico in 7 mesi. Le ${CASTING.stats.placed} persone collocate dal ${CASTING.stats.activeSince} sono partite quasi tutte da zero col tedesco.`,
+      },
+      {
+        q: 'C\'è un limite di età per partecipare?',
+        a: 'Il limite pratico è 45 anni, legato alla soglia per il riconoscimento fluido del titolo presso la Croce Rossa Svizzera (SRK). L\'età media delle ultime persone collocate è 32 anni; sono partite a 28 e a 38, e c\'è chi ha completato il percorso a 38.',
+      },
+      {
+        q: 'Possono partecipare anche infermieri uomini?',
+        a: 'Sì. Il programma è aperto a infermiere e infermieri di entrambi i generi. Tra le persone collocate negli ultimi anni circa il 30-40% sono uomini.',
+      },
+    ],
+  },
+  {
+    title: 'Tedesco e riconoscimento titolo SRK',
+    items: [
+      {
+        q: 'Quanto dura il corso di tedesco di Progetto Svizzera?',
+        a: '7 mesi totali: 12 settimane di tedesco generale A1/A2 + 12 settimane di tedesco B1/B2 settoriale infermieristico (lessico clinico, conversazione coi pazienti, scrittura cartella infermieristica). In parallelo si avviano le pratiche per il riconoscimento titolo SRK.',
+      },
+      {
+        q: 'Il corso di tedesco è online o in presenza?',
+        a: 'Online, con docenti madrelingua tedesca, lezioni quotidiane in gruppo + tutor dedicato. Non è autodidassia: l\'impegno richiesto è ~5 ore al giorno fra lezioni, esercizi e conversazione.',
+      },
+      {
+        q: 'Cos\'è il riconoscimento titolo SRK e quanto dura?',
+        a: 'Il riconoscimento titolo SRK (Schweizerisches Rotes Kreuz / Croce Rossa Svizzera) è la procedura ufficiale di equipollenza del titolo di infermiere italiano in Svizzera, necessaria per esercitare la professione infermieristica nel paese. Il processo richiede fino a 4 mesi e Progetto Svizzera segue passo per passo cosa serve, dove inviare e cosa aspettarsi.',
+      },
+    ],
+  },
+  {
+    title: 'Contratto, costi e libertà',
+    items: [
+      {
+        q: 'Chi firma il contratto di lavoro: Progetto Svizzera o la clinica?',
+        a: 'La clinica svizzera, direttamente con la persona candidata. Progetto Svizzera non è parte del contratto, non prende trattenute sullo stipendio, non incassa fee di placement. Lo stipendio proposto dalla clinica arriva intero sul conto della persona infermiera, ogni mese.',
+      },
+      {
+        q: 'Quanto costa partecipare a Progetto Svizzera?',
+        a: 'Le tariffe esatte vengono comunicate durante il casting e formalizzate nell\'Accordo di Adesione, senza sorprese in corso d\'opera. In sintesi: la parte linguistica (corsi A1/A2 e B1/B2 settoriale) e il riconoscimento titolo SRK sono a carico della persona candidata; il riconoscimento si salda a fine percorso. Trasferimento, onboarding e formazione interna in clinica sono a carico della struttura svizzera.',
+      },
+      {
+        q: 'Si può rinunciare al percorso a metà?',
+        a: 'Sì, in qualsiasi momento e senza penali. Il contratto di lavoro è diretto tra la persona candidata e la clinica svizzera: nessun vincolo di permanenza con Progetto Svizzera. Se ti accorgi a metà che non fa per te, smetti.',
+      },
+      {
+        q: 'Si può cambiare clinica dopo aver firmato il contratto?',
+        a: 'Sì. Le condizioni del cambio dipendono dal contratto firmato con la clinica svizzera (CCNL svizzero applicabile e clausole specifiche), non da Progetto Svizzera. Il nostro lavoro finisce all\'inserimento.',
+      },
+    ],
+  },
+  {
+    title: 'Vita e lavoro in Svizzera',
+    items: [
+      {
+        q: 'Quanto guadagna un infermiere o un\'infermiera in Svizzera tedesca?',
+        a: 'Lo stipendio dipende dalla clinica, dal cantone e dal CCNL svizzero applicabile. Le condizioni economiche esatte vengono comunicate dalle cliniche partner durante i colloqui individuali, prima della firma del contratto.',
+      },
+      {
+        q: 'Si può tornare in Italia nei weekend?',
+        a: 'Sì. La Svizzera tedesca è a 1-4 ore di auto o treno dai confini italiani: non è Australia. Molte persone collocate rientrano in Italia 1-2 weekend al mese, soprattutto chi vive a Zurigo, Berna, San Gallo, Lucerna.',
+      },
+      {
+        q: 'Cosa succede dopo l\'inserimento in clinica?',
+        a: 'La fase di onboarding linguistico in clinica dura circa 10 settimane (a carico della struttura) per consolidare il tedesco specialistico del reparto. Dopo, il rapporto di lavoro è gestito direttamente tra la persona infermiera e la clinica, secondo il CCNL svizzero applicabile.',
+      },
+    ],
+  },
+  {
+    title: 'Dubbi prima di iscriversi',
+    items: [
+      {
+        q: 'Posso valutare il percorso senza candidarmi subito?',
+        a: 'Sì. Puoi iscriverti alla newsletter per ricevere info sui prossimi casting senza pressione, oppure scrivere via email/WhatsApp per fare domande prima del casting. Il casting stesso è una conversazione strutturata: non ti chiediamo di firmare nulla durante il colloquio.',
+      },
+      {
+        q: 'Cosa distingue Progetto Svizzera dalle altre agenzie tipo IMP, Joblaborum, Universitalent?',
+        a: 'Tre differenze operative: (1) il contratto di lavoro lo firmi direttamente con la clinica, non con noi; (2) non prendiamo commissioni o trattenute sul tuo stipendio; (3) non hai vincoli di permanenza nei nostri confronti. Le agenzie di collocamento tipicamente fanno almeno una di queste tre cose.',
+      },
+      {
+        q: 'Avete già provato a far partire persone che non hanno completato il percorso?',
+        a: `Sì. Il completion rate è ${CASTING.stats.completionRate}%, il che significa che una piccola percentuale si ferma a metà percorso. Le ragioni più comuni: i primi 3-4 mesi di tedesco sono impegnativi, oppure cambiano le condizioni di vita personali. Senza penali, senza fatica burocratica.`,
+      },
+    ],
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: sections.flatMap((s) =>
+    s.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  ),
+};
+---
+
+<BaseV2 title={title} description={description}>
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container" style="padding-top: 120px; padding-bottom: 80px;">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Risposte chiare</p>
+      <h1 class="ps-display ps-display-lg" style="margin: 32px 0 0; max-width: 1000px; color: var(--ps-on-dark);">
+        Domande<br />
+        <span style="color: var(--ps-secondary);">frequenti.</span>
+      </h1>
+      <p class="ps-body ps-body-lg ps-body-strong" style="margin: 32px 0 0; max-width: 720px;">
+        Cos'è Progetto Svizzera, chi può partecipare, quanto dura il percorso, come funziona il
+        riconoscimento titolo SRK, chi paga cosa, chi firma il contratto. Risposte dirette, in
+        linguaggio operativo.
+      </p>
+    </div>
+  </section>
+
+  <Stripe />
+
+  {sections.map((section) => (
+    <section style="background: var(--ps-canvas-soft); border-top: 1px solid var(--ps-hairline-strong);">
+      <div class="ps-container-narrow" style="padding-top: 64px; padding-bottom: 64px;">
+        <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">{section.title}</p>
+        <div style="margin-top: 32px;">
+          {section.items.map((item) => (
+            <details class="ps-faq">
+              <summary>{item.q}</summary>
+              <p class="ps-faq-body">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBand image={operatingRoom} alt="Reparto" eyebrow="La tua domanda non c'è?" headlineMain="Scrivici," headlineAccent="rispondiamo entro 48h." body="Email, telefono o WhatsApp. Senza pressione, senza obblighi." ctaPrimaryHref="/v2/contatti" ctaPrimaryLabel="Vai ai contatti →" ctaSecondaryHref="/v2/registrazione" ctaSecondaryLabel="Iscriviti al casting" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</BaseV2>

@@ -1,22 +1,188 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { CONTACTS } from '../data/config';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import FadeIn from '../components/FadeIn.tsx';
+import teamCollab from '../assets/swiss/team-collaboration.jpg';
+
+const title = 'Testimonianze';
+const description = '150 infermiere italiane hanno completato il percorso Progetto Svizzera dal 2018. Le loro storie: cosa è andato bene, cosa è stato duro, cosa rifarebbero.';
+
+/* TODO V7 + V8 — pull-quote da transcript reali, consenso citazione clinica + reparto + città */
+
+const ambasciatori = [
+  { name: 'Gianfabio L.', role: 'Infermiere', image: '/uploads/gianfabio-new.jpg' },
+  { name: 'Marica P.', role: 'Infermiera', image: '/uploads/marica-new-5.png' },
+  { name: 'Deniss G.', role: 'Infermiere', image: '/uploads/deniss-g.png' },
+  { name: 'Aleksandra S.', role: 'Infermiera', image: '/uploads/aleksandra-new.jpg' },
+  { name: 'Sefora S.', role: 'Infermiera', image: '/uploads/sefora-new.jpg' },
+  { name: 'Franceska V.', role: 'Infermiera', image: '/uploads/franceska-v-new.png' },
+  { name: 'Fabio M.', role: 'Infermiere', image: '/uploads/fabio-m.jpg' },
+  { name: 'Federica D.', role: 'Infermiera', image: '/uploads/federica-d.jpg' },
+  { name: 'Marzia U.', role: 'Infermiera', image: '/uploads/marzia-u.jpg' },
+  { name: 'Annalisa D.', role: 'Infermiera', image: '/uploads/annalisa-d.jpg' },
+  { name: 'Angelo D.', role: 'Infermiere', image: '/uploads/angelo-d.jpg' },
+  { name: 'Mirela T.', role: 'Infermiera', image: '/uploads/mirela-t.jpg' },
+];
+
+const videos = [
+  { id: 'gianfabio', title: 'Gianfabio: dal turnismo italiano al ratio 4:1', src: '/videos/gianfabio-testimonianza.mp4' },
+  { id: 'roberta', title: 'Roberta: 32 anni, mutuo, percorso fatto comunque', src: '/videos/roberta-amato.mp4' },
+  { id: 'federico', title: 'Federico: il riconoscimento del titolo SRK passo per passo', src: '/videos/federico-celeste.mp4' },
+  { id: 'sapna', title: 'Sapna: la prima settimana in reparto a Zurigo', src: '/videos/sapna-testimonianza-new.mp4' },
+];
+
+const testimonialsCelebrative = [
+  { name: 'Annalisa D.R.', city: '[Città]', clinic: '[Clinica]', reparto: 'Reparto', quote: 'Pensavo fosse un\'impresa ardua, partivo da zero col tedesco. I docenti mi hanno seguita passo dopo passo per un anno: con l\'impegno quotidiano si arriva.', rating: 5 as const },
+  { name: 'Federico C.', city: '[Città]', clinic: '[Clinica]', reparto: 'Reparto', quote: 'Avevo letto di tante "agenzie" che promettono lavoro in 3 mesi. Qui invece la prima cosa che ti dicono è "ci vogliono 7 mesi seri". Per me è stato il segnale di credibilità.', rating: 5 as const },
+];
+
+const testimonialsHonest = [
+  { name: 'Roberta A.', city: '[Città]', clinic: '[Clinica]', reparto: 'Reparto', quote: 'I primi 4 mesi di tedesco sono stati duri, non lo nascondo. Senza il gruppo di studio non ce l\'avrei fatta.', rating: 4 as const },
+  { name: 'Marzia U.', city: '[Città]', clinic: '[Clinica]', reparto: 'Reparto', quote: 'Avevo 32 anni, un mutuo e un fidanzato. Pensavo fosse troppo tardi per ricominciare. Non lo era — ma ho avuto bisogno di mesi per convincermene.', rating: 4 as const },
+  { name: 'Federica D.', city: '[Città]', clinic: '[Clinica]', reparto: 'Reparto', quote: 'Onestamente, il primo mese in clinica è stato difficile. Capivo metà delle cose che mi dicevano in dialetto. Poi piano piano si entra nel ritmo.', rating: 4 as const },
+];
 ---
 
-<Base
-  title="Testimonianze"
-  description="Le parole degli infermieri italiani che hanno completato il percorso Progetto Svizzera e lavorano in Svizzera tedesca."
->
-  <section class="mx-auto max-w-5xl px-4 py-24 md:px-6">
-    <h1 class="font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl">
-      Testimonianze
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
-      Le storie dirette di chi ha fatto il percorso prima di te.
-    </p>
+<Base title={title} description={description}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={teamCollab}
+        alt="Team di infermieri al lavoro"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70"></div>
+    </div>
+    <div class="relative z-10 mx-auto max-w-3xl px-4 py-24 md:px-6 md:py-28">
+      <FadeIn client:load>
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Testimonianze</p>
+        <h1 class="mt-3 font-display text-4xl font-bold text-brand-primary md:text-6xl">
+          150 storie reali, dal 2018.
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-brand-ink/85">
+          Profili diversi: età, città di partenza, reparto. Quello che hanno in comune è il percorso.
+          Trovi qui video, pull-quote e racconti di chi ce l'ha fatta — e anche di chi ha avuto difficoltà.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
 
-    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Video testimonianze + carousel + WhatsApp floating
-      button in Blocco 4.
+  {/* Ambasciatori auto-scroll */}
+  <section class="overflow-hidden bg-white py-12">
+    <div class="relative">
+      <div class="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-white to-transparent sm:w-32"></div>
+      <div class="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-white to-transparent sm:w-32"></div>
+      <div class="flex animate-scroll gap-6 hover:[animation-play-state:paused]">
+        {[...ambasciatori, ...ambasciatori].map((p, idx) => (
+          <div class="flex-shrink-0 px-4 text-center">
+            <div class="mx-auto h-20 w-20 overflow-hidden rounded-full border-2 border-brand-secondary/40 bg-brand-muted shadow-md sm:h-24 sm:w-24">
+              <img
+                src={p.image}
+                alt={p.name}
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-3 text-sm font-semibold text-brand-ink">{p.name}</p>
+            <p class="text-xs text-brand-muted-foreground">{p.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Video */}
+  <section class="bg-brand-muted/40 py-20">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">Le voci del progetto</h2>
+        <p class="mt-3 text-brand-ink/75">Storie complete in video. Niente edit aggressivi, parole di chi ci è passato.</p>
+      </FadeIn>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {videos.map((v, idx) => (
+          <FadeIn client:visible delay={idx * 0.08}>
+            <article class="overflow-hidden rounded-lg border border-brand-border bg-white shadow-sm transition-shadow hover:shadow-lg">
+              <video controls preload="metadata" class="aspect-video w-full bg-brand-ink">
+                <source src={v.src} type="video/mp4" />
+                Il tuo browser non supporta il tag video.
+              </video>
+              <div class="p-5">
+                <h3 class="font-display font-semibold text-brand-primary">{v.title}</h3>
+              </div>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Celebrative */}
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">Il percorso visto da chi l'ha completato</h2>
+        <p class="mt-3 text-brand-ink/75">Storie celebrative, perché funziona.</p>
+      </FadeIn>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {testimonialsCelebrative.map((t, idx) => (
+          <FadeIn client:visible delay={idx * 0.08}>
+            <TestimonialCard name={t.name} city={t.city} clinic={t.clinic} reparto={t.reparto} quote={t.quote} rating={t.rating} />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Difficoltà */}
+  <section class="bg-brand-muted/40 py-20">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">Anche le difficoltà</h2>
+        <p class="mt-3 text-brand-ink/75">
+          Non tutte le storie sono state lineari. Queste sono persone che hanno completato il percorso ma hanno avuto momenti duri.
+        </p>
+      </FadeIn>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {testimonialsHonest.map((t, idx) => (
+          <FadeIn client:visible delay={idx * 0.08}>
+            <TestimonialCard name={t.name} city={t.city} clinic={t.clinic} reparto={t.reparto} quote={t.quote} rating={t.rating} />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Contatto colleghe */}
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-3xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">Vuoi parlare con una collega che ha già fatto il percorso?</h2>
+        <p class="mt-4 text-base text-brand-ink/80">
+          Durante ogni casting sono presenti ex collocate disponibili a rispondere alle tue domande.
+          Se vuoi un contatto prima del casting, scrivici via email o WhatsApp.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <a href={`mailto:${CONTACTS.email}`} class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-sm font-semibold text-brand-ink transition-all hover:scale-[1.02] hover:border-brand-primary hover:text-brand-primary">Scrivici via email</a>
+          <a href="/contatti" class="inline-flex items-center justify-center rounded-md bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-brand-primary/90">Vai ai contatti</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* CTA finale */}
+  <section class="bg-brand-primary py-16">
+    <div class="mx-auto max-w-4xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-white md:text-3xl">Vuoi essere la prossima storia?</h2>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={PRIMARY_CTA.href} class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-brand-secondary/90">{PRIMARY_CTA.label}</a>
+          <a href={SECONDARY_CTA.href} class="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 text-base font-semibold text-white transition-all hover:scale-105 hover:bg-white/20">{SECONDARY_CTA.label}</a>
+        </div>
+      </FadeIn>
     </div>
   </section>
 </Base>

@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { CASTING } from '../../data/config';
+
+interface Props {
+  image: ImageMetadata;
+  alt?: string;
+  eyebrow?: string;
+  headlineMain?: string;
+  headlineAccent?: string;
+  body?: string;
+  ctaPrimaryHref?: string;
+  ctaPrimaryLabel?: string;
+  ctaSecondaryHref?: string;
+  ctaSecondaryLabel?: string;
+}
+const {
+  image,
+  alt = '',
+  eyebrow = `Prossimo casting · ${CASTING.nextDateDisplay}`,
+  headlineMain = 'Iscriviti entro',
+  headlineAccent = `il ${CASTING.deadlineDisplay}.`,
+  body = 'Online · 20 minuti a persona · Niente test.',
+  ctaPrimaryHref = '/v2/registrazione',
+  ctaPrimaryLabel = 'Iscriviti al casting →',
+  ctaSecondaryHref = '/v2/newsletter',
+  ctaSecondaryLabel = 'Resta in contatto',
+} = Astro.props;
+---
+
+<section style="position: relative; overflow: hidden; min-height: 560px; display: flex; align-items: center; border-top: 1px solid var(--ps-hairline);">
+  <div style="position: absolute; inset: 0; z-index: 0;">
+    <Image
+      src={image}
+      alt={alt}
+      loading="lazy"
+      style="width: 100%; height: 100%; object-fit: cover; opacity: 0.35;"
+    />
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, var(--ps-canvas) 0%, rgba(15,31,53,0.85) 100%);"></div>
+  </div>
+  <div class="ps-container-narrow" style="position: relative; z-index: 10; padding-top: 120px; padding-bottom: 120px; text-align: center;">
+    <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">{eyebrow}</p>
+    <h2 class="ps-display ps-display-lg" style="margin: 32px 0 0; color: var(--ps-on-dark);">
+      {headlineMain}<br />
+      <span style="color: var(--ps-secondary);">{headlineAccent}</span>
+    </h2>
+    <p style="margin: 32px auto 0; max-width: 580px; font-size: 17px; line-height: 1.6; color: var(--ps-body-strong); font-weight: 300;">
+      {body}
+    </p>
+    <div style="margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+      <a href={ctaPrimaryHref} class="ps-button ps-button-primary">{ctaPrimaryLabel}</a>
+      <a href={ctaSecondaryHref} class="ps-button ps-button-outline">{ctaSecondaryLabel}</a>
+    </div>
+  </div>
+</section>

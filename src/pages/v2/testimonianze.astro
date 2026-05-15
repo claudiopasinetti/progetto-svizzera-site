@@ -1,0 +1,147 @@
+---
+import BaseV2 from '../../layouts/BaseV2.astro';
+import HeroBand from '../../components/v2/HeroBand.astro';
+import CtaBand from '../../components/v2/CtaBand.astro';
+import SectionHeader from '../../components/v2/SectionHeader.astro';
+import Stripe from '../../components/v2/Stripe.astro';
+import operatingRoom from '../../assets/swiss/operating-room.jpg';
+import nurseTraining from '../../assets/swiss/nurse-training.jpg';
+
+const title = 'Testimonianze';
+const description = '150 infermiere e infermieri italiani hanno completato il percorso Progetto Svizzera dal 2018. Le loro storie: cosa è andato bene, cosa è stato duro, cosa rifarebbero.';
+
+const ambasciatori = [
+  { name: 'Gianfabio L.', image: '/uploads/gianfabio-new.jpg' },
+  { name: 'Marica P.', image: '/uploads/marica-new-5.png' },
+  { name: 'Deniss G.', image: '/uploads/deniss-g.png' },
+  { name: 'Aleksandra S.', image: '/uploads/aleksandra-new.jpg' },
+  { name: 'Sefora S.', image: '/uploads/sefora-new.jpg' },
+  { name: 'Franceska V.', image: '/uploads/franceska-v-new.png' },
+  { name: 'Fabio M.', image: '/uploads/fabio-m.jpg' },
+  { name: 'Federica D.', image: '/uploads/federica-d.jpg' },
+  { name: 'Marzia U.', image: '/uploads/marzia-u.jpg' },
+  { name: 'Annalisa D.', image: '/uploads/annalisa-d.jpg' },
+  { name: 'Angelo D.', image: '/uploads/angelo-d.jpg' },
+  { name: 'Mirela T.', image: '/uploads/mirela-t.jpg' },
+];
+
+const videos = [
+  { id: 'gianfabio', title: 'Gianfabio: dal turnismo italiano al ratio 4:1', src: '/videos/gianfabio-testimonianza.mp4' },
+  { id: 'roberta', title: 'Roberta: 32 anni, mutuo, percorso fatto comunque', src: '/videos/roberta-amato.mp4' },
+  { id: 'federico', title: 'Federico: il riconoscimento del titolo SRK passo per passo', src: '/videos/federico-celeste.mp4' },
+  { id: 'sapna', title: 'Sapna: la prima settimana in reparto a Zurigo', src: '/videos/sapna-testimonianza-new.mp4' },
+];
+
+const celebrative = [
+  { name: 'Annalisa D.R.', role: 'Reparto · clinica [Città]', quote: "Pensavo fosse un'impresa ardua, partivo da zero col tedesco. I docenti mi hanno seguita passo dopo passo per un anno: con l'impegno quotidiano si arriva." },
+  { name: 'Federico C.', role: 'Reparto · clinica [Città]', quote: "Avevo letto di tante 'agenzie' che promettono lavoro in 3 mesi. Qui invece la prima cosa che ti dicono è 'ci vogliono 7 mesi seri'. Per me è stato il segnale di credibilità." },
+];
+
+const honest = [
+  { name: 'Roberta A.', role: 'Reparto · clinica [Città]', quote: "I primi 4 mesi di tedesco sono stati duri, non lo nascondo. Senza il gruppo di studio non ce l'avrei fatta." },
+  { name: 'Marzia U.', role: 'Reparto · clinica [Città]', quote: "Avevo 32 anni, un mutuo e un fidanzato. Pensavo fosse troppo tardi per ricominciare. Non lo era — ma ho avuto bisogno di mesi per convincermene." },
+  { name: 'Federica D.', role: 'Reparto · clinica [Città]', quote: "Onestamente, il primo mese in clinica è stato difficile. Capivo metà delle cose che mi dicevano in dialetto. Poi piano piano si entra nel ritmo." },
+];
+---
+
+<BaseV2 title={title} description={description}>
+  <HeroBand image={nurseTraining} alt="Team di infermieri al lavoro" eyebrow="Voci dal reparto" minHeight="540px">
+    <h1 class="ps-display ps-display-lg" style="max-width: 1100px; color: var(--ps-on-dark);">
+      150 storie reali,<br />
+      <span style="color: var(--ps-secondary);">dal 2018.</span>
+    </h1>
+    <p class="ps-body ps-body-lg ps-body-strong" style="margin: 32px 0 0; max-width: 700px;">
+      Persone diverse con profili diversi: età, città di partenza, reparto.
+    </p>
+    <p class="ps-body ps-body-lg ps-body-strong" style="margin: 16px 0 0; max-width: 700px;">
+      Quello che hanno in comune è il percorso.
+    </p>
+    <p class="ps-body ps-body-lg ps-body-strong" style="margin: 16px 0 0; max-width: 700px;">
+      Qui trovi testimonianze, video e racconti di chi ce l'ha fatta, nonostante le difficoltà.
+    </p>
+  </HeroBand>
+
+  <Stripe />
+
+  <section style="background: var(--ps-canvas); overflow: hidden;">
+    <div style="padding-top: 80px; padding-bottom: 80px;">
+      <div class="ps-container" style="margin-bottom: 48px;">
+        <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Ambasciatori</p>
+      </div>
+      <div style="position: relative;">
+        <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 100px; background: linear-gradient(90deg, var(--ps-canvas) 0%, transparent 100%); z-index: 2;"></div>
+        <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 100px; background: linear-gradient(270deg, var(--ps-canvas) 0%, transparent 100%); z-index: 2;"></div>
+        <div class="ps-marquee">
+          {[...ambasciatori, ...ambasciatori].map((p) => (
+            <div style="flex-shrink: 0; text-align: center; min-width: 140px;">
+              <div style="aspect-ratio: 1; width: 96px; margin: 0 auto; overflow: hidden; border: 2px solid var(--ps-secondary); background: var(--ps-canvas-card);">
+                <img src={p.image} alt={p.name} loading="lazy" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.2);" />
+              </div>
+              <p class="ps-label" style="margin: 16px 0 0; color: var(--ps-on-dark);">{p.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas-soft);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Le voci del progetto" title="Storie complete in video." body="Niente edit aggressivi, solo le parole di chi ci è passato prima di te." />
+      <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+        {videos.map((v) => (
+          <article style="background: var(--ps-canvas);">
+            <video controls preload="metadata" style="aspect-ratio: 16/9; width: 100%; background: var(--ps-canvas); display: block;">
+              <source src={v.src} type="video/mp4" />
+              Il tuo browser non supporta il tag video.
+            </video>
+            <div style="padding: 24px 28px;">
+              <h3 class="ps-display" style="font-size: 18px; line-height: 1.3; color: var(--ps-on-dark);">{v.title}</h3>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Testimonianze" title="Il percorso visto da chi l'ha completato." />
+      <div style="margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1px; background: var(--ps-hairline);">
+        {celebrative.map((t) => (
+          <article style="background: var(--ps-canvas-card); padding: 48px 36px; display: flex; flex-direction: column; gap: 32px;">
+            <div style="width: 32px; height: 4px; background: var(--ps-secondary);"></div>
+            <p style="margin: 0; font-size: 19px; line-height: 1.5; color: var(--ps-on-dark); font-weight: 300;">"{t.quote}"</p>
+            <div style="margin-top: auto;">
+              <p class="ps-label" style="color: var(--ps-on-dark);">{t.name}</p>
+              <p class="ps-body" style="margin: 8px 0 0; font-size: 13px;">{t.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas-soft); border-top: 1px solid var(--ps-hairline-strong);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Anche le difficoltà" title="Non tutte le storie sono state lineari." body="Persone che hanno completato il percorso ma hanno avuto momenti duri. Le loro voci sono importanti come quelle celebrative." />
+      <div style="margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--ps-hairline);">
+        {honest.map((t) => (
+          <article style="background: var(--ps-canvas); padding: 40px 32px; display: flex; flex-direction: column; gap: 24px;">
+            <div style="width: 24px; height: 4px; background: var(--ps-muted);"></div>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ps-on-dark); font-weight: 300;">"{t.quote}"</p>
+            <div style="margin-top: auto;">
+              <p class="ps-label" style="color: var(--ps-on-dark);">{t.name}</p>
+              <p class="ps-body" style="margin: 8px 0 0; font-size: 13px;">{t.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="ps-body" style="margin-top: 32px; font-size: 13px; color: var(--ps-muted);">
+        ↳ Cliniche e città in attesa consenso pubblicitario candidate/i (V7+V8 Barbara).
+      </p>
+    </div>
+  </section>
+
+  <CtaBand image={operatingRoom} alt="Reparto" headlineMain="Vuoi essere tu" headlineAccent="la prossima storia?" />
+</BaseV2>

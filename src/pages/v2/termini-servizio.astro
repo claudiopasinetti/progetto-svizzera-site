@@ -1,0 +1,73 @@
+---
+import BaseV2 from '../../layouts/BaseV2.astro';
+import { BRAND, CONTACTS } from '../../data/config';
+
+const title = 'Termini di servizio';
+const description = 'Termini di utilizzo del sito web e dei servizi di Progetto Svizzera ai sensi della normativa applicabile.';
+
+const sections = [
+  {
+    title: 'Titolare',
+    body: `${BRAND.legal.company}\n${BRAND.legal.address}`,
+    extraEmail: true,
+  },
+  {
+    title: 'Oggetto',
+    body: `Il sito ${BRAND.url} promuove il programma di formazione linguistica e coordinamento per il collocamento di personale infermieristico italiano presso strutture sanitarie della Svizzera tedesca. Non costituisce offerta di lavoro né intermediazione paritaria: il rapporto di lavoro nasce esclusivamente tra la persona candidata e la clinica svizzera selezionata.`,
+  },
+  {
+    title: 'Iscrizione al casting',
+    body: `L'iscrizione al casting tramite il modulo del sito non comporta alcun obbligo di prosecuzione, né da parte tua né da parte nostra. La selezione consiste in un colloquio individuale online al termine del quale viene comunicato l'esito.`,
+  },
+  {
+    title: 'Costi del percorso',
+    body: `I costi della formazione linguistica (corsi A1/A2 e B1/B2 settoriale) e del riconoscimento del titolo presso la Croce Rossa Svizzera sono a carico della persona candidata, secondo le tariffe comunicate al momento dell'Accordo di Adesione. Non vengono effettuate trattenute sullo stipendio.`,
+  },
+  {
+    title: 'Limitazione responsabilità',
+    body: `Pur facendo il possibile per garantire l'accuratezza delle informazioni pubblicate sul sito, non offriamo garanzie sulla disponibilità di posizioni specifiche presso le cliniche partner né sulla durata esatta dei tempi di riconoscimento titolo (gestiti da Croce Rossa Svizzera).`,
+  },
+  {
+    title: 'Proprietà intellettuale',
+    body: `Tutti i contenuti del sito (testi, immagini, video, loghi) sono di proprietà di ${BRAND.legal.company} o utilizzati su licenza. La riproduzione non autorizzata è vietata.`,
+  },
+  {
+    title: 'Foro competente',
+    body: `Per controversie relative all'utilizzo del sito si applica la legge italiana. Per eventuali rapporti contrattuali con cliniche svizzere, le condizioni specifiche sono regolate dalla legge svizzera applicabile alla relazione di lavoro.`,
+  },
+];
+---
+
+<BaseV2 title={title} description={description}>
+  <article style="background: var(--ps-canvas);">
+    <div class="ps-container-narrow" style="padding-top: 120px; padding-bottom: 96px;">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Documento legale</p>
+      <h1 class="ps-display ps-display-lg" style="margin: 32px 0 8px; color: var(--ps-on-dark);">
+        Termini di servizio.
+      </h1>
+      <p class="ps-body" style="margin: 0 0 64px; font-size: 13px; color: var(--ps-muted);">Aggiornati al 4 maggio 2026</p>
+
+      <div style="display: flex; flex-direction: column; gap: 48px;">
+        {sections.map((s, idx) => (
+          <>
+            <section>
+              <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">{s.title}</h2>
+              <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7; white-space: pre-line;">{s.body}</p>
+              {s.extraEmail && (
+                <p class="ps-body ps-body-strong" style="margin: 8px 0 0; line-height: 1.7;">
+                  Email: <a href={`mailto:${CONTACTS.email}`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">{CONTACTS.email}</a>
+                </p>
+              )}
+            </section>
+            {idx < sections.length - 1 && <hr class="ps-hairline" />}
+          </>
+        ))}
+
+        <p class="ps-body" style="margin-top: 32px; font-size: 12px; color: var(--ps-muted); padding-top: 32px; border-top: 1px solid var(--ps-hairline);">
+          Per chiarimenti, scrivici a
+          {' '}<a href={`mailto:${CONTACTS.email}`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">{CONTACTS.email}</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseV2>

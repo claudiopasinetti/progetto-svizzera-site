@@ -1,0 +1,38 @@
+---
+import { CASTING } from '../data/config';
+import { PRIMARY_CTA } from '../data/navigation';
+import CountdownCasting from './CountdownCasting.tsx';
+
+const isExpired = new Date(CASTING.deadlineIso).getTime() <= Date.now();
+---
+
+{!isExpired && (
+  <aside
+    class="bg-brand-primary text-white"
+    role="region"
+    aria-label="Avviso prossimo casting"
+  >
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-2 text-sm md:flex-row md:px-6">
+      <p class="text-center md:text-left">
+        <span class="font-semibold">Casting {CASTING.nextDateDisplay}</span>
+        <span class="hidden md:inline"> · </span>
+        <span class="block md:inline">deadline iscrizioni {CASTING.deadlineDisplay}</span>
+      </p>
+      <div class="flex items-center gap-3">
+        <span class="text-xs uppercase tracking-wider text-white/70">Mancano</span>
+        <CountdownCasting
+          client:idle
+          targetIso={CASTING.deadlineIso}
+          expiredLabel="Iscrizioni chiuse"
+          className="font-mono text-sm tabular-nums"
+        />
+        <a
+          href={PRIMARY_CTA.href}
+          class="rounded bg-brand-secondary px-3 py-1 text-xs font-semibold transition-colors hover:bg-brand-secondary/90"
+        >
+          Iscriviti →
+        </a>
+      </div>
+    </div>
+  </aside>
+)}

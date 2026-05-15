@@ -1,15 +1,86 @@
 ---
 import Base from '../layouts/Base.astro';
+import { BRAND, CONTACTS } from '../data/config';
+
+const title = 'Termini di servizio';
+const description = 'Termini di utilizzo del sito web e dei servizi di Progetto Svizzera ai sensi della normativa applicabile.';
 ---
 
-<Base title="Termini di servizio" noindex>
-  <section class="mx-auto max-w-3xl px-4 py-24 md:px-6">
-    <h1 class="font-display text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
+<Base title={title} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-20 md:px-6 md:py-24">
+    <h1 class="font-display text-4xl font-bold text-brand-primary md:text-5xl">
       Termini di servizio
     </h1>
-    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Migrazione testo termini + aggiornamento entity
-      Eumedica LLC in Blocco 2.
+    <p class="mt-2 text-sm text-brand-muted-foreground">Aggiornati al 4 maggio 2026</p>
+
+    <div class="mt-10 space-y-8 text-brand-ink/85">
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Titolare</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          {BRAND.legal.company}<br />
+          {BRAND.legal.address}<br />
+          Email: <a href={`mailto:${CONTACTS.email}`} class="text-brand-secondary hover:underline">{CONTACTS.email}</a>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Oggetto</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          Il sito {BRAND.url} promuove il programma di formazione linguistica e coordinamento
+          per il collocamento di personale infermieristico italiano presso strutture sanitarie
+          della Svizzera tedesca. Non costituisce offerta di lavoro né intermediazione paritaria:
+          il rapporto di lavoro nasce esclusivamente tra la candidata e la clinica svizzera selezionata.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Iscrizione al casting</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          L'iscrizione al casting tramite il modulo del sito non comporta alcun obbligo di prosecuzione,
+          né da parte tua né da parte nostra. La selezione consiste in un colloquio individuale online
+          al termine del quale viene comunicato l'esito.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Costi del percorso</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          I costi della formazione linguistica (corsi A1/A2 e B1/B2 settoriale) e del riconoscimento
+          del titolo presso la Croce Rossa Svizzera sono a carico della candidata, secondo le tariffe
+          comunicate al momento dell'Accordo di Adesione. Non vengono effettuate trattenute sullo stipendio.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Limitazione responsabilità</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          Pur facendo il possibile per garantire l'accuratezza delle informazioni pubblicate sul sito,
+          non offriamo garanzie sulla disponibilità di posizioni specifiche presso le cliniche partner né
+          sulla durata esatta dei tempi di riconoscimento titolo (gestiti da Croce Rossa Svizzera).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Proprietà intellettuale</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          Tutti i contenuti del sito (testi, immagini, video, loghi) sono di proprietà di
+          {' '}{BRAND.legal.company} o utilizzati su licenza. La riproduzione non autorizzata è vietata.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-xl font-bold text-brand-primary">Foro competente</h2>
+        <p class="mt-2 text-sm leading-relaxed">
+          Per controversie relative all'utilizzo del sito si applica la legge italiana. Per eventuali
+          rapporti contrattuali con clinics svizzere, le condizioni specifiche sono regolate dalla
+          legge svizzera applicabile alla relazione di lavoro.
+        </p>
+      </section>
+
+      <p class="text-xs text-brand-muted-foreground">
+        Per chiarimenti, scrivici a
+        {' '}<a href={`mailto:${CONTACTS.email}`} class="text-brand-secondary hover:underline">{CONTACTS.email}</a>.
+      </p>
     </div>
-  </section>
+  </article>
 </Base>

@@ -1,0 +1,7 @@
+---
+interface Props {
+  variant?: 'tricolor' | 'red';
+}
+const { variant = 'tricolor' } = Astro.props;
+---
+<div class={variant === 'red' ? 'ps-stripe' : 'ps-stripe-tri'} aria-hidden="true"></div>

@@ -1,8 +1,10 @@
 ---
 import '../styles/global.css';
-import { BRAND, SEO_DEFAULTS } from '../data/config';
+import { BRAND, SEO_DEFAULTS, WHATSAPP } from '../data/config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CastingStrip from '../components/CastingStrip.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.tsx';
 
 export interface Props {
   title?: string;
@@ -59,10 +61,12 @@ const ogImageUrl = new URL(ogImage, BRAND.url).toString();
     {/* TODO(Blocco 5): inject GA4 + GTM + Meta Pixel tags dietro Consent Mode v2 */}
   </head>
   <body class="min-h-screen flex flex-col bg-brand-bg text-brand-ink">
+    <CastingStrip />
     <Header />
     <main id="main" class="flex-1">
       <slot />
     </main>
     <Footer />
+    <WhatsAppFloat client:idle link={WHATSAPP.linkWithMessage} />
   </body>
 </html>

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+
+const title = 'Casi di studio';
+const description = 'Storie complete di chi ha completato il percorso Progetto Svizzera. Approfondimenti scritti da pubblicare a partire da fine 2026.';
+---
+
+<Base title={title} description={description}>
+  <section class="mx-auto max-w-3xl px-4 py-24 md:px-6 md:py-32">
+    <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">In preparazione</p>
+    <h1 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand-primary md:text-5xl">
+      Storie complete dal percorso
+    </h1>
+    <p class="mt-6 text-lg leading-relaxed text-brand-ink/80">
+      Stiamo lavorando con chi ha completato il percorso a raccogliere storie lunghe — non clip,
+      ma il racconto integrale: i mesi di tedesco, la giornata di selezione, la prima settimana di reparto a Zurigo o Berna.
+      Ogni caso include città di partenza, clinica, reparto e firma di chi lo racconta.
+    </p>
+    <p class="mt-4 text-lg leading-relaxed text-brand-ink/80">
+      I primi articoli saranno pubblicati nella seconda metà del 2026, dopo le selezioni di maggio e ottobre.
+      Nel frattempo, le testimonianze video e scritte sono già disponibili su <a href="/testimonianze" class="font-semibold text-brand-secondary underline-offset-4 hover:underline">/testimonianze</a>.
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href={PRIMARY_CTA.href}
+        class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-brand-secondary/90"
+      >
+        {PRIMARY_CTA.label}
+      </a>
+      <a
+        href={SECONDARY_CTA.href}
+        class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-base font-semibold text-brand-ink transition-colors hover:border-brand-primary hover:text-brand-primary"
+      >
+        {SECONDARY_CTA.label}
+      </a>
+    </div>
+  </section>
+</Base>

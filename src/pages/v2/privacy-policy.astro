@@ -1,0 +1,137 @@
+---
+import BaseV2 from '../../layouts/BaseV2.astro';
+import { BRAND, CONTACTS } from '../../data/config';
+
+const title = 'Privacy Policy';
+const description = 'Informativa sul trattamento dei dati personali raccolti dal sito Progetto Svizzera ai sensi del Reg. UE 2016/679 (GDPR).';
+---
+
+<BaseV2 title={title} description={description}>
+  <article style="background: var(--ps-canvas);">
+    <div class="ps-container-narrow" style="padding-top: 120px; padding-bottom: 96px;">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Documento legale</p>
+      <h1 class="ps-display ps-display-lg" style="margin: 32px 0 8px; color: var(--ps-on-dark);">
+        Privacy Policy.
+      </h1>
+      <p class="ps-body" style="margin: 0 0 64px; font-size: 13px; color: var(--ps-muted);">Aggiornata al 4 maggio 2026</p>
+
+      <div style="display: flex; flex-direction: column; gap: 48px;">
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Titolare del trattamento</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            {BRAND.legal.company}<br />
+            {BRAND.legal.address}<br />
+            Email: <a href={`mailto:${CONTACTS.email}`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">{CONTACTS.email}</a>
+          </p>
+          <p class="ps-body" style="margin: 16px 0 0; font-size: 13px; color: var(--ps-muted); line-height: 1.6;">
+            Trattandosi di titolare extra-UE che processa dati personali di interessati nell'Unione Europea,
+            ai sensi dell'art. 27 GDPR è in corso la nomina di un rappresentante UE. I riferimenti verranno
+            aggiornati su questa pagina al perfezionamento della nomina.
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Tipi di dati raccolti</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Raccogliamo dati che ci fornisci volontariamente compilando i moduli del sito (modulo casting,
+            modulo contatti, iscrizione newsletter): nome, cognome, email, telefono, città di residenza,
+            titolo di studio, anni di esperienza, motivazioni di candidatura.
+          </p>
+          <p class="ps-body" style="margin: 16px 0 0; line-height: 1.7;">
+            Raccogliamo inoltre dati tecnici di navigazione (indirizzo IP, browser, sistema operativo, pagine visitate,
+            referrer) tramite Google Analytics 4 e Google Tag Manager con consenso preventivo via cookie banner.
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Finalità del trattamento</h2>
+          <ul style="margin: 16px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px;" class="ps-body ps-body-strong">
+            <li>Gestione della candidatura al casting e processo di selezione (consenso esplicito + adempimento richiesta dell'interessata)</li>
+            <li>Risposta a richieste di informazioni inviate via form contatti, email, telefono, WhatsApp</li>
+            <li>Invio di comunicazioni newsletter solo previo consenso esplicito (interesse legittimo + opt-in)</li>
+            <li>Analisi statistiche aggregate sull'utilizzo del sito (interesse legittimo)</li>
+          </ul>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Condivisione dati</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            I tuoi dati possono essere condivisi con partner del progetto (Language Lab per la formazione linguistica,
+            Croce Rossa Svizzera per il riconoscimento titolo, cliniche svizzere durante la fase di colloqui)
+            esclusivamente in funzione della candidatura. Mai venduti a terzi.
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Responsabili del trattamento (art. 28)</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Per l'erogazione dei servizi del sito ci avvaliamo di fornitori esterni nominati responsabili del trattamento:
+          </p>
+          <ul style="margin: 16px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px;" class="ps-body ps-body-strong">
+            <li><strong style="color: var(--ps-on-dark);">Typeform</strong> (TYPEFORM SL, Spagna) — raccolta moduli di candidatura, hosting EU</li>
+            <li><strong style="color: var(--ps-on-dark);">Cloudflare Pages</strong> (Cloudflare Inc., US) — hosting del sito, server edge globali</li>
+            <li><strong style="color: var(--ps-on-dark);">Resend</strong> (Resend Inc., US) — invio transazionale email di conferma (in attivazione)</li>
+            <li><strong style="color: var(--ps-on-dark);">Google</strong> (Google LLC, US) — Analytics 4 e Tag Manager con consenso preventivo (in attivazione)</li>
+          </ul>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Trasferimento dati extra-UE</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Il titolare del trattamento ha sede negli Stati Uniti (Florida). Alcuni responsabili del trattamento
+            (Cloudflare, Resend, Google) hanno sede negli Stati Uniti. I trasferimenti di dati personali verso
+            paesi extra-UE avvengono sulla base delle Standard Contractual Clauses (SCC) approvate dalla
+            Commissione Europea (Decisione UE 2021/914) o, ove applicabile, della certificazione EU-US Data
+            Privacy Framework. Hai diritto di richiedere copia delle garanzie applicate scrivendo a
+            {' '}<a href={`mailto:${CONTACTS.email}`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">{CONTACTS.email}</a>.
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">I tuoi diritti (GDPR)</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Hai diritto di accesso, rettifica, cancellazione, limitazione del trattamento, portabilità,
+            opposizione e revoca del consenso. Per esercitarli scrivici a
+            {' '}<a href={`mailto:${CONTACTS.email}`} style="color: var(--ps-secondary-soft); border-bottom: 1px solid currentColor;">{CONTACTS.email}</a>.
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Periodo di conservazione</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Dati di candidature concluse: 24 mesi dal termine del processo (per consentire ricontatto su future selezioni).
+            Dati newsletter: fino a revoca del consenso. Dati tecnici di navigazione: fino a 14 mesi (default GA4).
+          </p>
+        </section>
+
+        <hr class="ps-hairline" />
+
+        <section>
+          <h2 class="ps-display" style="font-size: 22px; line-height: 1.3; color: var(--ps-on-dark);">Reclami</h2>
+          <p class="ps-body ps-body-strong" style="margin: 16px 0 0; line-height: 1.7;">
+            Hai diritto di proporre reclamo all'Autorità Garante per la protezione dei dati personali (Italia)
+            o all'autorità competente dello Stato membro di residenza.
+          </p>
+        </section>
+
+        <p class="ps-body" style="margin-top: 32px; font-size: 12px; color: var(--ps-muted); padding-top: 32px; border-top: 1px solid var(--ps-hairline);">
+          Documento legale di riferimento. Per dubbi specifici sul trattamento dei tuoi dati, scrivici.
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseV2>

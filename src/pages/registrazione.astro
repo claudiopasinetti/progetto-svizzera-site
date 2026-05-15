@@ -1,27 +1,111 @@
 ---
 import Base from '../layouts/Base.astro';
-import { CASTING } from '../data/config';
+import { CASTING, TYPEFORM_IDS } from '../data/config';
+import { SECONDARY_CTA } from '../data/navigation';
+import CountdownCasting from '../components/CountdownCasting.tsx';
+
+const title = 'Registrati al casting';
+const description = `Iscriviti al casting Progetto Svizzera del ${CASTING.nextDateDisplay}. Online, 20 minuti per candidata, deadline iscrizioni ${CASTING.deadlineDisplay}.`;
 ---
 
-<Base
-  title="Registrati al casting"
-  description={`Iscrizione al casting Progetto Svizzera del ${CASTING.nextDateDisplay}. Sessione online di circa ${CASTING.duration} per infermieri italiani interessati al percorso verso la Svizzera tedesca.`}
->
-  <section class="mx-auto max-w-5xl px-4 py-24 md:px-6">
-    <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
-      Selezioni 2026
-    </p>
-    <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl">
-      Registrati al prossimo casting
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
-      {CASTING.nextDateDisplay}, online. Deadline iscrizioni:
-      <strong>{CASTING.deadlineDisplay}</strong>.
-    </p>
+<Base title={title} description={description}>
+  <section class="bg-gradient-to-b from-brand-muted/30 to-white">
+    <div class="mx-auto max-w-5xl px-4 py-20 md:px-6 md:py-24">
+      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">
+        Iscrizioni aperte
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-brand-primary md:text-5xl">
+        Casting {CASTING.nextDateDisplay}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
+        Online, durata circa {CASTING.duration} a candidata. Presentiamo il progetto, conosciamo te,
+        capiamo insieme se è il percorso giusto. Niente test, niente esame: è una conversazione.
+      </p>
 
-    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Typeform embed + countdown timer + form qualificazione
-      nel Blocco 3. Per ora le iscrizioni restano sul vecchio sito Lovable.
+      <div class="mt-10 flex flex-col gap-4 rounded-lg border border-brand-secondary/30 bg-white p-6 md:flex-row md:items-center md:justify-between md:p-8">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-brand-muted-foreground">Mancano alla deadline</p>
+          <p class="mt-1 font-mono text-2xl font-semibold text-brand-primary tabular-nums">
+            <CountdownCasting client:idle targetIso={CASTING.deadlineIso} expiredLabel="Iscrizioni chiuse per maggio" />
+          </p>
+          <p class="mt-1 text-xs text-brand-muted-foreground">
+            Iscrizioni aperte fino al {CASTING.deadlineDisplay}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">
+        Cosa succede dopo che invii il modulo
+      </h2>
+      <ol class="mt-8 space-y-6">
+        <li class="flex gap-4">
+          <span class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-secondary font-semibold text-white">1</span>
+          <div>
+            <p class="font-semibold text-brand-ink">Conferma email entro 1 ora</p>
+            <p class="mt-1 text-sm text-brand-ink/75">Ricevi una conferma automatica con i prossimi step.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-secondary font-semibold text-white">2</span>
+          <div>
+            <p class="font-semibold text-brand-ink">Beatrice ti chiama entro 48h lavorative</p>
+            <p class="mt-1 text-sm text-brand-ink/75">
+              Una breve telefonata per confermare disponibilità e chiarire dubbi prima del casting.
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-secondary font-semibold text-white">3</span>
+          <div>
+            <p class="font-semibold text-brand-ink">Inviti al casting + slot orario</p>
+            <p class="mt-1 text-sm text-brand-ink/75">
+              Ricevi il link Zoom e l'orario del tuo colloquio individuale per il {CASTING.nextDateDisplay}.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <p class="mt-8 rounded-md bg-brand-muted/50 p-4 text-sm text-brand-ink/80">
+        Il modulo dura circa 5 minuti, sono ~10 domande. Non ti chiediamo documenti in questa fase.
+        I tuoi dati restano riservati e non vengono condivisi con terzi.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-brand-muted/30 py-16">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <h2 class="mb-6 font-display text-2xl font-bold text-brand-primary md:text-3xl">
+        Modulo di iscrizione
+      </h2>
+      <div
+        class="rounded-lg border border-brand-border bg-white shadow-sm"
+        data-tf-live={TYPEFORM_IDS.registration}
+        style="width: 100%; min-height: 600px;"
+      ></div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-3xl px-4 text-center md:px-6">
+      <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">
+        Non sei pronta a iscriverti adesso?
+      </h2>
+      <p class="mx-auto mt-3 max-w-2xl text-base text-brand-ink/75">
+        Va benissimo. Il casting di {CASTING.nextDateDisplay} è uno dei tre del 2026.
+        Se vuoi seguire il progetto e ricevere info sui prossimi senza pressione, lascia solo l'email.
+      </p>
+      <a
+        href={SECONDARY_CTA.href}
+        class="mt-6 inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-sm font-semibold text-brand-ink transition-colors hover:border-brand-primary hover:text-brand-primary"
+      >
+        {SECONDARY_CTA.label}
+      </a>
+    </div>
+  </section>
+
+  <script src="https://embed.typeform.com/next/embed.js" async></script>
 </Base>

@@ -1,0 +1,58 @@
+---
+export interface Props {
+  name: string;
+  city?: string;
+  clinic?: string;
+  reparto?: string;
+  quote: string;
+  rating?: 4 | 5;
+  avatar?: string;
+  highlight?: boolean;
+}
+
+const {
+  name,
+  city,
+  clinic,
+  reparto,
+  quote,
+  rating = 4,
+  avatar,
+  highlight = false,
+} = Astro.props;
+
+const stars = Array.from({ length: 5 }, (_, i) => i < rating);
+---
+
+<article class:list={[
+  'rounded-lg border bg-white p-6 md:p-7',
+  highlight ? 'border-brand-secondary/40 shadow-md' : 'border-brand-border',
+]}>
+  <div class="flex items-center gap-1 text-brand-secondary" aria-label={`Valutazione ${rating} su 5`}>
+    {stars.map((filled) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.5" class="h-4 w-4" aria-hidden="true">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 00-.364 1.118l1.287 3.957c.3.922-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.176 0l-3.367 2.446c-.784.57-1.838-.196-1.539-1.118l1.286-3.957a1 1 0 00-.363-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.05 2.927z" />
+      </svg>
+    ))}
+  </div>
+
+  <blockquote class="mt-4 text-base leading-relaxed text-brand-ink">
+    <p>“{quote}”</p>
+  </blockquote>
+
+  <footer class="mt-6 flex items-center gap-3">
+    {avatar ? (
+      <img src={avatar} alt={`Foto di ${name}`} class="h-10 w-10 rounded-full object-cover" loading="lazy" />
+    ) : (
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-muted text-sm font-semibold text-brand-primary" aria-hidden="true">
+        {name.charAt(0)}
+      </div>
+    )}
+    <div class="text-sm">
+      <p class="font-semibold text-brand-ink">{name}</p>
+      <p class="text-brand-muted-foreground">
+        {[reparto, clinic, city].filter(Boolean).join(' · ')}
+      </p>
+    </div>
+  </footer>
+</article>

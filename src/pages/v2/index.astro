@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets';
+import BaseV2 from '../../layouts/BaseV2.astro';
+import Stripe from '../../components/v2/Stripe.astro';
+import HeroBand from '../../components/v2/HeroBand.astro';
+import CtaBand from '../../components/v2/CtaBand.astro';
+import SectionHeader from '../../components/v2/SectionHeader.astro';
+import { CASTING } from '../../data/config';
+import heroNursing from '../../assets/swiss/hero-team-alps.png';
+import swissAlps from '../../assets/swiss/swiss-alps-real.jpg';
+import operatingRoom from '../../assets/swiss/operating-room.jpg';
+
+const title = 'Lavorare nella Svizzera tedesca';
+const description = 'Dal 2018, 150 colleghe e colleghi in reparto. Casting 23 maggio 2026. Organizziamo noi i colloqui, il contratto lo firmi tu — direttamente con la clinica.';
+
+const stats = [
+  { value: CASTING.stats.activeSince, label: 'Dal' },
+  { value: CASTING.stats.totalCastings, label: 'Casting svolti' },
+  { value: `${CASTING.stats.placed}+`, label: 'Colleghe in reparto' },
+  { value: `${CASTING.stats.completionRate}%`, label: 'Completion rate' },
+];
+
+// Testimonial scritte rimosse — sostituite da video reali in arrivo (consensi V8 in corso).
+// Le storie pubbliche già pubblicate vivono su /v2/testimonianze + Instagram (Nassma, Dennis, Christie).
+---
+
+<BaseV2 title={title} description={description}>
+  <HeroBand image={heroNursing} alt="Team di infermiere e infermieri in una clinica svizzera con vista sulle Alpi" eyebrow={`Prossimo Casting · ${CASTING.nextDateDisplay} · Online`} minHeight="720px">
+    <h1 class="ps-display ps-display-xl" style="max-width: 1100px; color: var(--ps-on-dark);">
+      Lavorare nella<br />
+      Svizzera <span style="color: var(--ps-secondary);">tedesca.</span>
+    </h1>
+    <p style="margin: 40px 0 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: var(--ps-body-strong); font-weight: 300;">
+      Dal {CASTING.stats.activeSince} aiutiamo infermiere e infermieri italiani a trasferirsi nella
+      Svizzera tedesca grazie a un percorso strutturato e validato da +{CASTING.stats.placed} infermieri.
+    </p>
+    <div style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 16px;">
+      <a href="/v2/registrazione" class="ps-button ps-button-primary">Iscriviti al casting →</a>
+      <a href="/v2/il-tuo-percorso" class="ps-button ps-button-outline">Scopri il percorso</a>
+    </div>
+  </HeroBand>
+
+  <Stripe />
+
+  <section style="background: var(--ps-canvas);">
+    <div class="ps-container ps-section">
+      <div class="ps-grid-1px" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        {stats.map((s) => (
+          <div class="ps-cell">
+            <p class="ps-display ps-display-sm" style="color: var(--ps-on-dark);">{s.value}</p>
+            <p class="ps-label" style="margin: 16px 0 0; color: var(--ps-muted);">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ps-canvas-soft); border-top: 1px solid var(--ps-hairline-strong); border-bottom: 1px solid var(--ps-hairline-strong);">
+    <div class="ps-container ps-section">
+      <SectionHeader eyebrow="Il progetto in 30 secondi" title="Una scuola di tedesco. Un coordinamento clinico. Contratti diretti." maxWidth="800px" />
+      <p class="ps-body ps-body-strong" style="margin: 24px 0 0; max-width: 740px; font-size: 17px; line-height: 1.7;">
+        Selezioniamo infermiere e infermieri italiani motivati a lavorare nella Svizzera tedesca.
+        Quello che facciamo, in cinque mosse:
+      </p>
+
+      <ol style="list-style: none; padding: 0; margin: 56px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--ps-hairline);">
+        {[
+          { n: '01', t: 'Selezione', b: 'Casting online individuale, 20 minuti a persona.' },
+          { n: '02', t: 'Formazione', b: '7 mesi di tedesco settoriale infermieristico (A1 → B1/B2).' },
+          { n: '03', t: 'Documenti SRK', b: 'Pratiche per il riconoscimento titolo presso la Croce Rossa Svizzera.' },
+          { n: '04', t: 'Cliniche partner', b: 'Colloqui individuali. La decisione finale di dove lavorare è tua.' },
+          { n: '05', t: 'Contratto diretto', b: 'Firma con la struttura scelta. Niente trattenute, niente vincoli.' },
+        ].map((s, idx) => (
+          <li style="background: var(--ps-canvas); padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; position: relative;">
+            <div style="display: flex; align-items: baseline; gap: 12px;">
+              <span class="ps-display" style="font-size: 36px; line-height: 1; color: var(--ps-secondary); letter-spacing: -0.02em;">{s.n}</span>
+              {idx < 4 && (
+                <span aria-hidden="true" style="display: none;" class="ps-step-arrow">→</span>
+              )}
+            </div>
+            <p class="ps-label" style="color: var(--ps-on-dark); margin: 0;">{s.t}</p>
+            <p class="ps-body" style="margin: 0; font-size: 14px; line-height: 1.55;">{s.b}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section style="position: relative; overflow: hidden; min-height: 520px; display: flex; align-items: center;">
+    <div style="position: absolute; inset: 0; z-index: 0;">
+      <Image src={swissAlps} alt="Paesaggio alpino Svizzera" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;" />
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, var(--ps-canvas) 0%, rgba(15,31,53,0.7) 50%, var(--ps-canvas) 100%);"></div>
+    </div>
+    <div class="ps-container" style="position: relative; z-index: 10; padding-top: 96px; padding-bottom: 96px; text-align: left; width: 100%;">
+      <p class="ps-label" style="color: var(--ps-secondary-soft); margin: 0;">Cosa ci differenzia dagli altri?</p>
+      <p class="ps-display ps-display-md" style="margin: 32px 0 0; color: var(--ps-on-dark); max-width: 900px;">
+        Organizziamo noi i colloqui.<br />
+        <span style="color: var(--ps-secondary);">Il contratto lo firmi tu.</span>
+      </p>
+      <p class="ps-body ps-body-strong" style="margin: 32px 0 0; max-width: 700px; font-size: 17px; line-height: 1.7;">
+        Ti accompagniamo lungo tutto il percorso: selezione, formazione di tedesco settoriale,
+        documenti SRK, colloqui con le cliniche partner. Quando arrivi al contratto, lo firmi tu
+        direttamente con la struttura svizzera. Lo stipendio ti arriva intero sul conto ogni mese,
+        senza trattenute e senza vincoli di permanenza.
+      </p>
+    </div>
+  </section>
+
+  <Stripe />
+
+  <section style="background: var(--ps-canvas-soft);">
+    <div class="ps-container" style="padding-top: 96px; padding-bottom: 64px;">
+      <SectionHeader eyebrow="Voci dal reparto" title="Le storie reali, raccontate da chi è già partito." />
+    </div>
+    <div class="ps-container" style="padding-bottom: 96px;">
+      <div style="background: var(--ps-canvas); padding: 64px 48px; display: flex; flex-direction: column; gap: 32px; max-width: 880px; border-left: 4px solid var(--ps-secondary);">
+        <p style="margin: 0; font-size: 20px; line-height: 1.5; color: var(--ps-on-dark); font-weight: 300;">
+          Stiamo raccogliendo le storie reali dei colleghi e delle colleghe partiti con il progetto.
+          Pubblichiamo i video man mano che arrivano i consensi alla pubblicazione e le produzioni.
+        </p>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--ps-body); font-weight: 300;">
+          Le storie già pubblicate — Nassma a Zurigo, Dennis da Roma, Christie in clinica —
+          le trovi sui nostri canali e nella pagina dedicata.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px;">
+          <a href="/v2/testimonianze" class="ps-button ps-button-primary ps-button-sm">Vai alle storie →</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="ps-button ps-button-outline ps-button-sm">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand image={operatingRoom} alt="Reparto ospedaliero" />
+</BaseV2>

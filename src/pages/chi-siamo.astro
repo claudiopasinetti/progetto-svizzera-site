@@ -1,24 +1,217 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import { CASTING, BRAND } from '../data/config';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+import AnimatedCounter from '../components/AnimatedCounter.tsx';
+import FadeIn from '../components/FadeIn.tsx';
+import peterGigerImg from '../assets/swiss/team-peter-giger-new.png';
+import beatriceBernardiniImg from '../assets/swiss/team-beatrice-bernardini-final.png';
+import barbaraBernardiniImg from '../assets/swiss/team-barbara-bernardini.png';
+import mandyMattheyImg from '../assets/swiss/team-mandy-matthey-final.png';
+import magdaleneNoldeImg from '../assets/swiss/team-magdalene-nolde.jpg';
+import wolframKrausImg from '../assets/swiss/team-wolfram-kraus-final.png';
+import johannaJaudasImg from '../assets/swiss/team-johanna-jaudas.jpg';
+import infermieriItaliaLogo from '../assets/swiss/infermieri-italia-logo.png';
+import swissAlpsLandscape from '../assets/swiss/swiss-alps-landscape.jpg';
+
+const title = 'Chi siamo';
+const description = 'Progetto Svizzera nasce nel 2018 per accompagnare infermiere italiane verso la Svizzera tedesca. 11 casting, 150 collocate. Team Eumedica + Language Lab + docenti madrelingua.';
+
+const team = [
+  { name: 'Peter Giger', role: 'Responsabile Intermediazione e Collocamento', body: 'Coordina i rapporti con le cliniche svizzere e segue le candidate dalla firma del contratto fino all\'inserimento.', image: peterGigerImg },
+  { name: 'Beatrice Bernardini', role: 'Responsabile Formazione Linguistica', body: 'Supervisiona il percorso linguistico, monitora i progressi delle candidate, prepara ai colloqui con le strutture.', image: beatriceBernardiniImg },
+  { name: 'Barbara Bernardini', role: 'Coordinamento candidate + Docenza', body: 'È la prima persona con cui parli quando ti iscrivi. Coordina la pipeline candidate e affianca l\'attività di docenza.', image: barbaraBernardiniImg },
+  { name: 'Mandy Matthey', role: 'Docente · Tedesco settoriale infermieristico', body: 'Insegna e sviluppa i percorsi di tedesco professionale per il settore sanitario, focus su linguaggio tecnico-infermieristico.', image: mandyMattheyImg },
+  { name: 'Magdalene Nolde', role: 'Docente · Madrelingua DAF', body: 'Madrelingua tedesca con esperienza decennale come docente DAF, specializzata nel settore infermieristico.', image: magdaleneNoldeImg },
+  { name: 'Wolfram Kraus', role: 'Docente · Tedesco politico-economico-sanitario', body: 'Insegnante con esperienza pluriennale, specializzato in grammatica, interpretariato e traduzioni in ambito sanitario.', image: wolframKrausImg },
+  { name: 'Johanna Jaudas', role: 'Docente · Madrelingua DAF', body: 'Madrelingua tedesca con oltre 10 anni di esperienza nell\'insegnamento, generale e settore infermieristico.', image: johannaJaudasImg },
+];
+
+const values = [
+  { title: 'Onestà', body: 'Ti diciamo subito quanto costa, quanto dura, cosa serve. Niente sorprese a metà percorso.' },
+  { title: 'Strutturato', body: 'Niente fai-da-te. Programma a moduli, verifiche di livello, gruppo di studio, tutor dedicato.' },
+  { title: 'Selettivo', body: 'Non collochiamo a volume. Le cliniche partner cercano professioniste preparate, non numeri.' },
+  { title: 'Continuità', body: 'Ti seguiamo dalla giornata di selezione fino al primo turno in reparto. Poi sei libera.' },
+];
 ---
 
-<Base
-  title="Chi siamo"
-  description="Il team di Progetto Svizzera: selezione, formazione linguistica e inserimento lavorativo per infermieri italiani in Svizzera tedesca."
->
-  <section class="mx-auto max-w-5xl px-4 py-24 md:px-6">
-    <h1 class="font-display text-5xl font-bold tracking-tight text-brand-primary md:text-6xl">
-      Chi siamo
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink/80">
-      Progetto Svizzera è un programma di recruitment attivo dal 2018,
-      dedicato a infermieri italiani che vogliono lavorare nelle strutture
-      sanitarie della Svizzera tedesca.
-    </p>
+<Base title={title} description={description}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={swissAlpsLandscape}
+        alt="Paesaggio alpino svizzero"
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/70"></div>
+    </div>
+    <div class="relative z-10 mx-auto max-w-3xl px-4 py-24 md:px-6 md:py-32">
+      <FadeIn client:load>
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Chi siamo</p>
+        <h1 class="mt-3 font-display text-4xl font-bold text-brand-primary md:text-6xl">
+          Progetto Svizzera, dal 2018.
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-brand-ink/85">
+          Siamo un progetto nato per accompagnare infermiere italiane verso un sistema sanitario
+          che riconosce la professione. Lavoriamo con cliniche svizzere selezionate, una scuola di tedesco specializzata
+          sul settore sanitario, e con docenti madrelingua.
+        </p>
+        <p class="mt-3 text-lg leading-relaxed text-brand-ink/85">
+          Il contratto di lavoro lo firmi direttamente con la struttura: niente intermediazione, niente vincoli.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
 
-    <div class="mt-16 rounded-lg border border-dashed border-brand-border bg-brand-muted p-6 text-sm text-brand-muted-foreground">
-      <strong>Placeholder Blocco 1.</strong> Migrazione team (8 persone), mission, counter
-      animati, storia in Blocco 3.
+  {/* Stats animati */}
+  <section class="border-y border-brand-border bg-brand-muted/40 py-16">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <div class="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.activeSince} duration={1.5} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Anno di nascita</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.totalCastings} duration={1.5} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Casting svolti</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.placed} suffix="+" duration={2} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Colleghe collocate</p>
+          </div>
+          <div>
+            <p class="font-display text-4xl font-bold text-brand-secondary md:text-5xl">
+              <AnimatedCounter client:visible to={CASTING.stats.completionRate} suffix="%" duration={2} />
+            </p>
+            <p class="mt-2 text-sm text-brand-muted-foreground">Completion rate</p>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Team */}
+  <section class="bg-white py-20 md:py-24">
+    <div class="mx-auto max-w-7xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-3xl font-bold text-brand-primary md:text-4xl">Il team</h2>
+        <p class="mt-3 max-w-2xl text-brand-ink/75">
+          Le persone con cui parli durante il percorso. Beatrice è la voce del casting.
+          Barbara è la prima persona che ti risponde quando ti iscrivi.
+        </p>
+      </FadeIn>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {team.map((m, idx) => (
+          <FadeIn client:visible delay={idx * 0.05}>
+            <article class="group h-full rounded-lg border border-brand-border bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <div class="mb-4 h-24 w-24 overflow-hidden rounded-full border-4 border-brand-secondary/30 bg-brand-muted shadow-sm">
+                <Image
+                  src={m.image}
+                  alt={`${m.name}, ${m.role}`}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  widths={[96, 192]}
+                  sizes="96px"
+                />
+              </div>
+              <h3 class="font-display text-lg font-bold text-brand-primary">{m.name}</h3>
+              <p class="mt-1 text-xs uppercase tracking-wider text-brand-muted-foreground">{m.role}</p>
+              <p class="mt-3 text-sm leading-relaxed text-brand-ink/80">{m.body}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Valori */}
+  <section class="bg-brand-muted/40 py-20 md:py-24">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-3xl font-bold text-brand-primary md:text-4xl">Come lavoriamo</h2>
+      </FadeIn>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {values.map((v, idx) => (
+          <FadeIn client:visible delay={idx * 0.08}>
+            <article class="h-full rounded-lg border border-brand-border bg-white p-6 transition-shadow hover:shadow-md">
+              <h3 class="font-display text-lg font-bold text-brand-primary">{v.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-brand-ink/80">{v.body}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Eumedica + Language Lab */}
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">Eumedica + Language Lab</h2>
+        <p class="mt-4 text-base leading-relaxed text-brand-ink/80">
+          Operativamente Progetto Svizzera è gestito da <strong>{BRAND.legal.company}</strong>
+          ({BRAND.legal.address}) per il coordinamento clinico-amministrativo,
+          e da <strong>Language Lab</strong> per la formazione linguistica.
+        </p>
+        <p class="mt-3 text-base leading-relaxed text-brand-ink/80">
+          Il progetto è attivo dal 2018: precedentemente si chiamava "Svizzera Arrivo", ha cambiato nome
+          e si è strutturato meglio mantenendo gli stessi obiettivi.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* Partner */}
+  <section class="bg-brand-primary py-16">
+    <div class="mx-auto max-w-3xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <p class="text-sm font-semibold uppercase tracking-wider text-white/70">Il nostro partner editoriale</p>
+        <h2 class="mt-2 font-display text-2xl font-bold text-white md:text-3xl">Infermieri Italia</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-base text-white/85">
+          Portale di riferimento per la professione infermieristica in Italia.
+        </p>
+        <a
+          href="https://www.infermieritalia.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex items-center justify-center rounded-lg bg-white p-4 shadow-lg transition-transform hover:scale-105"
+        >
+          <Image
+            src={infermieriItaliaLogo}
+            alt="Infermieri Italia"
+            class="h-14 w-auto md:h-16"
+            loading="lazy"
+          />
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  {/* CTA finale */}
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-4xl px-4 text-center md:px-6">
+      <FadeIn client:visible>
+        <h2 class="font-display text-2xl font-bold text-brand-primary md:text-3xl">
+          Vuoi conoscerci di persona?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-base text-brand-ink/75">
+          Ogni casting è un'occasione per parlare con noi senza impegno.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={PRIMARY_CTA.href} class="inline-flex items-center justify-center rounded-md bg-brand-secondary px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-brand-secondary/90">{PRIMARY_CTA.label}</a>
+          <a href={SECONDARY_CTA.href} class="inline-flex items-center justify-center rounded-md border border-brand-border bg-white px-6 py-3 text-base font-semibold text-brand-ink transition-all hover:scale-105 hover:border-brand-primary hover:text-brand-primary">{SECONDARY_CTA.label}</a>
+        </div>
+      </FadeIn>
     </div>
   </section>
 </Base>

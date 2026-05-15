@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import { CASTING } from '../data/config';
+import { PRIMARY_CTA, SECONDARY_CTA } from '../data/navigation';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const title = 'Domande frequenti';
+const description = 'Tutte le risposte sul percorso Progetto Svizzera: tedesco, costi, tempi, contratto, riconoscimento titolo SRK, vita in Svizzera tedesca.';
+
+const faqGiulia = [
+  { q: 'Il tedesco è troppo difficile, non ce la farò mai a 30 anni.', a: 'Le 150 persone collocate dal 2018 sono partite quasi tutte da zero col tedesco. Il percorso dura 7 mesi, è strutturato, in gruppo, con tutor dedicato. Non ti chiediamo di fare l\'autodidatta.' },
+  { q: 'Sono truffe, leggo ovunque di fregature.', a: `${CASTING.stats.totalCastings} casting svolti dal 2018, ${CASTING.stats.placed} persone già collocate in cliniche svizzere reali. Il contratto di lavoro lo firmi direttamente con la struttura: nessuna intermediazione, nessuna trattenuta su stipendio.` },
+  { q: 'E se non trovo lavoro dopo i 7 mesi di corso?', a: `Il ${CASTING.stats.completionRate}% di chi completa il percorso firma un contratto. Non partiamo se non abbiamo aperture concrete: il corso è legato alla domanda reale delle cliniche partner.` },
+  { q: 'Non voglio sradicarmi.', a: 'La Svizzera tedesca è 1-4 ore in auto/treno dai confini italiani. Non è Australia. Molte colleghe rientrano in Italia 1-2 weekend al mese.' },
+  { q: 'Non voglio vincoli, se cambio idea voglio tornare.', a: 'Contratto diretto con la clinica svizzera: nessun vincolo di permanenza, nessuna penale se decidi di rescindere. Il nostro lavoro finisce all\'inserimento, poi sei libera.' },
+  { q: 'Quanto costa? Non ho soldi da anticipare.', a: 'I corsi A1/A2 e B1/B2 sono a tuo carico (indicativamente ~600-750€ ciascuno). Il riconoscimento titolo Croce Rossa Svizzera (~700 CHF) si salda a fine percorso. Trasferimento, onboarding e formazione interna in clinica sono a carico della struttura.' },
+  { q: 'Non sono abbastanza brava/esperta.', a: 'Servono laurea triennale + cittadinanza EU. L\'esperienza è un plus, non un blocco. Anche neolaureate motivate hanno completato il percorso e firmato contratti.' },
+  { q: 'Devo partire subito, non posso aspettare 7 mesi.', a: 'Il percorso richiede 7 mesi di formazione linguistica strutturata. Non è comprimibile senza compromettere il successo. Se cerchi un lavoro in 3 mesi, non siamo la soluzione giusta.' },
+  { q: 'Ho già provato con altri progetti.', a: 'Il nostro percorso ha 3 caratteristiche: contratto firmato direttamente tra te e la clinica (nessun intermediario), nessun vincolo di permanenza, scegli tu in quale struttura andare. Non tutti i progetti funzionano così.' },
+  { q: 'Mi sembra tutto troppo bello per essere vero.', a: 'Non lo è. I primi 4 mesi di tedesco sono duri, lontananza pesa, sistema svizzero richiede adattamento. Non è per chiunque: è per chi è motivata davvero. Se cerchi una scorciatoia, non la troverai qui.' },
+];
+
+const faqLaura = [
+  { q: 'Tanto non fa per me, è roba per gente diversa da me.', a: 'Le 150 persone collocate hanno età, città di partenza, profili familiari diversi. C\'è chi è partita a 28, chi a 38. Chi era single, chi con mutuo. Non c\'è un profilo unico.' },
+  { q: 'Non voglio scappare.', a: 'Non è una fuga. È un percorso strutturato verso un contesto professionale dove il tuo lavoro vale di più. Non stiamo dicendo "lascia tutto", stiamo dicendo "se ti interessa, c\'è un modo serio per farlo".' },
+  { q: 'Ormai è tardi per ricominciare.', a: 'L\'età media delle ultime collocate è 32 anni. C\'è chi ha completato il percorso a 38. Il limite è 45 per il riconoscimento titolo SRK fluido, non per le tue capacità.' },
+  { q: 'Ho il mutuo / il fidanzato / la famiglia.', a: 'Lo capiamo. Non siamo qui per dirti "lascia tutto subito". Iscriviti alla newsletter, segui le storie, parla coi tuoi cari. Quando e se sarà il momento giusto, il percorso sarà ancora qui.' },
+  { q: 'Non sono brava con le lingue.', a: 'Il corso è in gruppo, con tutor dedicato, lezioni quotidiane. Non è autodidassia. Molte collocate non avevano mai studiato tedesco prima.' },
+  { q: 'Forse il problema è il mio reparto, cambio reparto e passa.', a: 'Anche cambiare reparto è una decisione legittima. Ma se senti che il problema è più ampio del singolo reparto, e che vuoi un cambio strutturale, il percorso esiste.' },
+  { q: 'Sto cercando un master/specializzazione, non un trasferimento.', a: 'In Svizzera puoi continuare a specializzarti dopo l\'inserimento: la formazione continua è strutturata e finanziata dalle cliniche stesse. Non sono mondi alternativi.' },
+];
+
+const allFaq = [
+  { q: '— Sul percorso e la formazione —', a: '', segment: 'shared' as const },
+  ...faqGiulia.slice(0, 3),
+  { q: '— Sui costi e il contratto —', a: '', segment: 'shared' as const },
+  ...faqGiulia.slice(5, 7),
+  faqGiulia[4],
+  { q: '— Sulla scelta personale —', a: '', segment: 'shared' as const },
+  ...faqGiulia.slice(3, 4),
+  faqGiulia[7],
+  faqGiulia[9],
+  { q: '— Per chi non è ancora decisa —', a: '', segment: 'laura' as const },
+  ...faqLaura,
+];
+
+const faqList = allFaq.filter((f) => f.a !== '');
+---
+
+<Base title={title} description={description}>
+  <section class="bg-gradient-to-b from-brand-muted/30 to-white">
+    <div class="mx-auto max-w-3xl px-4 py-20 md:px-6 md:py-24">
+      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">17 risposte chiare</p>
+      <h1 class="mt-3 font-display text-4xl font-bold text-brand-primary md:text-5xl">
+        Domande frequenti
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-brand-ink/80">
+        Le domande che ci fanno tutte (e quelle che vorresti farci ma non osi).
+        Risposte oneste, anche dove la risposta è "non è per te".
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <FAQAccordion client:visible items={faqList} />
+    </div>
+  </section>
+
+  <section class="bg-brand-primary py-16">
+    <div class="mx-auto max-w-3xl px-4 text-center md:px-6">
+      <h2 class="font-display text-2xl font-bold text-white md:text-3xl">
+        La tua domanda non c'è?
+      </h2>
+      <p class="mx-auto mt-3 max-w-2xl text-base text-white/85">
+        Scrivici, rispondiamo entro 48h lavorative.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/contatti" class="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-base font-semibold text-brand-primary transition-colors hover:bg-white/90">Vai ai contatti</a>
+        <a href={PRIMARY_CTA.href} class="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/20">{PRIMARY_CTA.label}</a>
+      </div>
+    </div>
+  </section>
+</Base>

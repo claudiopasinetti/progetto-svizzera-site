@@ -1,0 +1,68 @@
+---
+/* TODO V11 — costi reali da Barbara/Beatrice. Valori indicativi da ICP §8 OB6 in attesa validazione. */
+
+interface CostRow {
+  phase: string;
+  duration: string;
+  cost: string;
+  payer: 'candidata' | 'clinica' | 'misto';
+  note?: string;
+}
+
+const rows: CostRow[] = [
+  { phase: 'Tedesco A1/A2', duration: '12 settimane', cost: 'Indicativo ~600€', payer: 'candidata' },
+  { phase: 'Tedesco B1/B2 settoriale', duration: '12 settimane', cost: 'Indicativo ~750€', payer: 'candidata' },
+  { phase: 'Riconoscimento titolo Croce Rossa Svizzera (SRK)', duration: 'fino a 4 mesi', cost: '~700 CHF', payer: 'candidata', note: 'Saldabile a fine percorso' },
+  { phase: 'Onboarding linguistico in clinica (10 sett.)', duration: 'primi 3 mesi in CH', cost: 'a carico clinica', payer: 'clinica' },
+  { phase: 'Trasferimento + alloggio iniziale', duration: '—', cost: 'budget personale', payer: 'candidata', note: 'A discrezione, alcune cliniche supportano' },
+];
+
+const payerLabel: Record<CostRow['payer'], string> = {
+  candidata: 'Tu',
+  clinica: 'Clinica',
+  misto: 'Misto',
+};
+---
+
+<div class="rounded-lg border border-brand-border bg-white p-6 md:p-8">
+  <div class="mb-4 flex items-baseline justify-between gap-4">
+    <h3 class="font-display text-xl font-bold text-brand-primary">Costi reali del percorso</h3>
+    <p class="text-xs text-brand-muted-foreground">Valori indicativi · in attesa validazione finale</p>
+  </div>
+
+  <p class="mb-6 text-sm leading-relaxed text-brand-ink/70">
+    Niente costi nascosti. La parte linguistica è a tuo carico, il riconoscimento titolo si salda a fine percorso,
+    il resto (onboarding, formazione interna) lo paga la clinica.
+  </p>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-sm">
+      <thead class="border-b border-brand-border text-xs uppercase tracking-wider text-brand-muted-foreground">
+        <tr>
+          <th class="pb-3 pr-4 font-semibold">Fase</th>
+          <th class="pb-3 pr-4 font-semibold">Durata</th>
+          <th class="pb-3 pr-4 font-semibold">Costo</th>
+          <th class="pb-3 font-semibold">A carico di</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-brand-border">
+        {rows.map((r) => (
+          <tr>
+            <td class="py-3 pr-4 font-medium text-brand-ink">
+              {r.phase}
+              {r.note && <span class="block text-xs font-normal text-brand-muted-foreground">{r.note}</span>}
+            </td>
+            <td class="py-3 pr-4 text-brand-ink/80">{r.duration}</td>
+            <td class="py-3 pr-4 text-brand-ink/80">{r.cost}</td>
+            <td class="py-3 text-brand-ink/80">{payerLabel[r.payer]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="mt-6 text-xs leading-relaxed text-brand-muted-foreground">
+    Niente trattenute sullo stipendio in clinica. Niente penali se decidi di non proseguire.
+    Il contratto di lavoro lo firmi direttamente con la struttura svizzera.
+  </p>
+</div>

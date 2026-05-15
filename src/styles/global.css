@@ -1,9 +1,9 @@
-/* Google Fonts — da self-hostare in Blocco 5 per performance. Deve precedere @import di tailwindcss per non violare CSS spec */
+/* Google Fonts — Montserrat display + Inter body */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors — normalizzati dal site-repo Lovable (eliminata incongruenza #FF1A1A vs #B91C1C) */
+  /* Brand colors — Wave A+B (palette navy + rosso Lovable) */
   --color-brand-primary: #1E3A5F;
   --color-brand-secondary: #B91C1C;
   --color-brand-navy: #0F1F35;
@@ -58,5 +58,22 @@
   ::selection {
     background-color: var(--color-brand-secondary);
     color: #fff;
+  }
+}
+
+@layer utilities {
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .animate-scroll {
+    animation: scroll 50s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll {
+      animation: none;
+    }
   }
 }
